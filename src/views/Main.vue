@@ -50,6 +50,16 @@ export default {
     background-color: rgba(255,255,255,0.5);
     text-align: center;
     z-index: 2;
+    animation-name: down;
+    animation-duration: 1s;
+    @keyframes down {
+      from {
+        transform: translate(0,-90%);
+      }
+      to {
+        transform: translate(0,0);
+      }
+    }
     &-hide {
       position: absolute;
       bottom: 0;

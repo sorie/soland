@@ -26,14 +26,14 @@
         <a href="http://www.tving.com/live/player/C00551" target="_self" :style="`background-image:url(http://image.tving.com${slide.content.banner_image_url})`" class="logger_click" :data-evtname="`${slide.banner_type}/PCV7_MAIN_TOP_ROLLING/${slide.content.banner_title}`" :data-ga_name_data="`${slide.banner_type}/${slide.content.banner_title}`" :data-nethru_clcode="`${slide.banner_type}`">       
         <!-- background-image: url("http://image.tving.com/upload/fe/highlight/2019/0131/20190131223455banner_image_url_u.png"); -->
           <div class="slide_cont vod">    
-            <span class="title">{{slide.content.banner_title3 }}</span>         
-            <span class="sub"> {{slide.content.banner_sub_title3 }} </span>             
-            <span class="sub2" :style="`color: #${slide.content.banner_bc_notice_color}`">{{slide.content.banner_bc_notice }}</span>           
+            <span class="title">{{slide.content.banner_title3}}</span>         
+            <span class="sub"> {{slide.content.banner_sub_title3}} </span>             
+            <span class="sub2" :style="`color: #${slide.content.banner_bc_notice_color}`">{{slide.content.banner_bc_notice}}</span>           
           </div>   
         </a>
       </li>
 
-      <li class="swiper-slide" >
+      <!-- <li class="swiper-slide" >
         <div class="bg bg-right" style="background-color: #000"></div>
         <div class="bg bg-left" style="background-color: #000"></div>
         <iframe width="1200" height="380" src="https://www.youtube.com/embed/GNnFNxx4Exw" frameborder="0" allow="autoplay;" allowfullscreen style="height: 380px;margin: 0 auto;"></iframe>
@@ -44,9 +44,9 @@
         <div class="bg bg-left" style="background-color: #000"></div>
         <iframe width="1200" height="380" src="https://www.youtube.com/embed/4pHl7I_8rxA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </li>
-      
+       -->
       <!-- </div> -->
-      
+         
     </ul>
     <div class="swiper-button-prev" slot="button-prev"></div>
     <div class="swiper-button-next" slot="button-next"></div>
@@ -78,11 +78,23 @@
 <script>
 import Constant from '../Constant'
 import { mapState } from 'vuex'
-import Swiper from 'swiper'
+import Swiper from 'swiper/dist/js/swiper.esm.bundle'
 
 export default {
   data() {
     return {
+      // dummy slides data
+      slides: (function () {
+        var slides = [];
+        for (var i = 0; i < 600; i += 1) {
+          slides.push('Slide ' + (i + 1));
+        }
+        return slides;
+      }()),
+      // virtual data
+      virtualData: {
+        slides: [],
+      },
       swiperOption: {
         loop: true,
         slidesPerView: 'auto',
@@ -120,7 +132,17 @@ export default {
   mounted : function() {    
     this.$store.dispatch(Constant.FETCH_EVENTSLIDE)
     this.$store.dispatch(Constant.FETCH_CLIP)
-    new Swiper('.swiper-container', this.swiperOption)
+    const self = this;
+    let swiperOption = this.swiperOption;
+    const swiper = new Swiper('.swiper-container', swiperOption,{
+      virtual: {
+        slides: self.slides,
+        renderExternal() { 
+          // assign virtual slides data
+          self.virtualData = self.bannerdata
+        },
+      },
+    })
   },
   methods: {
     getBanner($d) {
