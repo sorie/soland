@@ -33,7 +33,7 @@
         </a>
       </li>
 
-      <!-- <li class="swiper-slide" >
+      <li class="swiper-slide" >
         <div class="bg bg-right" style="background-color: #000"></div>
         <div class="bg bg-left" style="background-color: #000"></div>
         <iframe width="1200" height="380" src="https://www.youtube.com/embed/GNnFNxx4Exw" frameborder="0" allow="autoplay;" allowfullscreen style="height: 380px;margin: 0 auto;"></iframe>
@@ -43,7 +43,7 @@
         <div class="bg bg-right" style="background-color: #000"></div>
         <div class="bg bg-left" style="background-color: #000"></div>
         <iframe width="1200" height="380" src="https://www.youtube.com/embed/4pHl7I_8rxA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </li> -->
+      </li>
       
       <!-- </div> -->
       
@@ -53,7 +53,6 @@
     
     <div class="swiper-pagination" slot="pagination"></div>
   </section>
-<!-- {{clipdata}} -->
   <section class="cont__wrapper">
     <div class="cont" v-if="clipdata.length > 0">
       <div class="img">
@@ -74,7 +73,6 @@
     </div>
   </section>
 
-
 </div>
 </template>
 <script>
@@ -89,18 +87,18 @@ export default {
         loop: true,
         slidesPerView: 'auto',
         centeredSlides: true,
-        // // spaceBetween: 30,
-        // lazy: {
-        //     loadPrevNext: true,
-        //     loadPrevNextAmount: 100,
-        // },
-        // navigation: {
-        //   nextEl: '.swiper-button-next',
-        //   prevEl: '.swiper-button-prev'
-        // },
-        // pagination: {
-        //   el: '.swiper-pagination'
-        // },
+        // spaceBetween: 30,
+        lazy: {
+            loadPrevNext: true,
+            loadPrevNextAmount: 100,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        pagination: {
+          el: '.swiper-pagination'
+        },
         autoplay: false,
         on: {
           init: function() {
@@ -125,21 +123,9 @@ export default {
     new Swiper('.swiper-container', this.swiperOption)
   },
   methods: {
-    // getBanner($d) {
-    //   return `http://image.tving.com${$d}`
-    // },
-    // axiosFunc($jq_header,$res) {
-    //   let tmp1 = $res.data
-    //   let tmp2 = tmp1.replace($jq_header,"")
-    //   let tmp3 = tmp2.replace(tmp2[0],"")
-    //   let find = ")";
-    //   let lastIndex = tmp3.lastIndexOf(find);
-    //   if (lastIndex === -1) {
-    //     return tmp3;
-    //   }
-    //   let beginString = tmp3.substring(0, lastIndex)
-    //   this.finallyres = JSON.parse(beginString)
-    // },//axiosFunc end
+    getBanner($d) {
+      return `http://image.tving.com${$d}`
+    },
     clipImageUrl($s) {
       let src="http://image.tving.com/crop.php?u=http://image.tving.com"
       return src + $s

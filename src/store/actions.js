@@ -8,7 +8,6 @@ export default {
     let apiUrl = 'http://api.tving.com/v1/operator/highlights?callback=jQuery112306467581448671456_1549500996465&positionKey=PCV7_MAIN_TOP_ROLLING&cacheTime=5&screenCode=CSSD0100&networkCode=CSND0900&osCode=CSOD0900&teleCode=CSCD0900&apiKey=1e7952d0917d6aab1f0293a063697610&responseType=group&_=1549500996469'
     axios.get(apiUrl)
     .then((res) =>{
-      // this.axiosFunc(jq_header,res)
       let tmp1 = res.data
       let tmp2 = tmp1.replace(jq_header,"")
       let tmp3 = tmp2.replace(tmp2[0],"")

@@ -14,6 +14,15 @@ export default {
 </script>
 <style>
 body {
+  background-color: black;
+  color: #fff;
   margin: 0;
+  overflow-x: hidden;
+  transition: all 1s ease-in;
+}
+::selection {
+  background: #FF3D00;
+  color: #fff;
+  text-shadow: none;
 }
 </style>
