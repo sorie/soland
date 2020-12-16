@@ -1,33 +1,19 @@
 <template>
   <div class="mainTable">
       <table>
-        <col width="15%"/>
-        <col width="10%"/>
-        <col width="15%"/>
-        <col width="10%"/>
-        <col width="10%"/>
-        <col width="30%"/>
-        <col width="10%"/>
         <thead>
           <tr>
-            <td>{{project.titlename[0]}}</td>
-            <td>{{project.titlename[1]}}</td>
-            <td>{{project.titlename[2]}}</td>
-            <td>{{project.titlename[3]}}</td>
-            <td>{{project.titlename[4]}}</td>
-            <td>{{project.titlename[5]}}</td>
-            <td>{{project.titlename[6]}}</td>
+            <td v-for="(item, idx) in project.titlename" :key="`item-newmain-${idx}`">{{project.titlename[idx]}}</td>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item, idx) in project.items" :key="`item-newmain-${idx}`">
             <td>{{item.name}}</td>
             <td>{{item.date}}</td>
-            <td>{{item.work}}</td>
-            <td>{{item.percentage}}</td>
-            <td>{{item.documenttype}}</td>
-            <td>{{item.crossbrowsing}}</td>
-            <td>{{item.content}}</td>
+            <td>{{item.workspace}}</td>
+            <td>{{item.language}}</td>
+            <td>{{item.role}}</td>
+            <td>{{item.type}}</td>
           </tr>
         </tbody>
       </table>
