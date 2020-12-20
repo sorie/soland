@@ -13,5 +13,10 @@ yarn install
 yarn run serve
 ```
 
+### 테스트 url
+```
+http://localhost:8080/
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
