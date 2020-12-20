@@ -7,12 +7,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, idx) in project.items" :key="`item-newmain-${idx}`">
+          <tr v-for="(item, idx) in projectListVal.items" :key="`item-newmain-${idx}`">
             <td>{{item.name}}</td>
-            <td>{{item.date}}</td>
+            <td v-html=item.date>{{item.date}}</td>
             <td>{{item.workspace}}</td>
             <td>{{item.language}}</td>
-            <td>{{item.role}}</td>
+            <td v-html=item.role></td>
             <td>{{item.type}}</td>
           </tr>
         </tbody>
@@ -27,6 +27,18 @@ export default {
     return{
       project:prjecList
     }
+  }, 
+  computed:{
+    projectListVal : function(){
+      this.project.items.forEach(data => {
+        console.log(data.role);
+        if(data.role){
+          data.date = data.date.replace(/\\n/g, '<br/>');
+          data.role = data.role.replace(/\\n/g, '<br/>');
+        }
+      });
+      return this.project;
+    }
   }
 }
 </script>
@@ -36,6 +48,7 @@ export default {
   margin: auto;
   padding: 2rem;
   table {
+    background:rgba(255,255,255,0.1);
     margin-top: 7rem;
     border-collapse: collapse;
     thead {
@@ -43,15 +56,31 @@ export default {
       border-bottom: 2px solid white;
       text-align: center;
       line-height: 3em;
-      td {
-        // border: 1px solid red;
+      td:nth-child(1) {
+        width: 10%;
+      }
+      td:nth-child(2) {
+        width: 10%;
+      }
+      td:nth-child(3) {
+        width: 10%;
+      }
+      td:nth-child(4) {
+        width: 10%;
+      }
+      td:nth-child(5) {
+        width: 50%;
+      }
+      td:nth-child(6) {
+        width: 10%;
       }
     }
     tbody {
       tr {
         line-height: 2em;
         border-bottom: 1px solid white;
-        text-align: center;
+        text-align: left;
+        font-size: 0.8rem;
       }
     }
   }

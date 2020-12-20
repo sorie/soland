@@ -1,5 +1,5 @@
 <template>
-  <div class="mainMovie" ref="mainMovie" :style="[mainStyle]">
+  <div class="mainMovie" :style="[mainStyle]">
     <pro-list></pro-list>
     <!-- <my-canvas style="width:100%;height:100%">
     </my-canvas> -->
@@ -36,15 +36,16 @@ export default {
 </script>
 <style lang="scss">
 a, li {
-  color: white;
+  color: #f00;
   list-style: none;
   text-decoration: none;
 }
 
 .mainMovie {
-  min-height: 400px;
+  height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
+  overflow-y: scroll;
 }
 
 </style>

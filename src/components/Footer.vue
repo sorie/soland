@@ -2,7 +2,7 @@
   <div class="footer">
     <em>
       Copyright 2019 <mark>SORI JOENG</mark> All rights reserved.<br>
-      my email : enne3939@gmail.com
+      email : enne3939@gmail.com
       <!-- <time datetime="2019-02-25" pubdate>2019-02-2</time> -->
     </em>
   </div>

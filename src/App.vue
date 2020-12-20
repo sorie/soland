@@ -19,6 +19,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   transition: all 1s ease-in;
+  font-size: 12px;
 }
 ::selection {
   background: #FF3D00;
