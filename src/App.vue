@@ -23,6 +23,7 @@ ul, menu, dir {
     padding-left: 0px;
 }
 a {
+  color: #fafafa;
   list-style: none;
   text-decoration: none;
 }

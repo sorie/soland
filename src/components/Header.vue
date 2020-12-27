@@ -1,5 +1,5 @@
 <template>
-  <div class="mainMovie" :style="[mainStyle]">
+  <div class="mainMovie" ref="mainStyle" :style="[mainStyle]">
     <pro-list></pro-list>
     <!-- <my-canvas style="width:100%;height:100%">
     </my-canvas> -->

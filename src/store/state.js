@@ -7,5 +7,9 @@ export default {
     total: 0,
     total_pages: 0
   },
-  clipdata : { api_url_item : [], has_more :  '', pcu_id : '', pcu_ord : '', pcu_title : '' }
+  clipdata : { 
+    results: [],
+    total: 0,
+    total_pages: 0
+  }
 }

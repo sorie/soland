@@ -31,7 +31,6 @@ export default {
   computed:{
     projectListVal : function(){
       this.project.items.forEach(data => {
-        console.log(data.role);
         if(data.role){
           data.date = data.date.replace(/\\n/g, '<br/>');
           data.role = data.role.replace(/\\n/g, '<br/>');

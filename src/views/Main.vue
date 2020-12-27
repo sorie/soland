@@ -23,7 +23,7 @@ export default {
     headHide() {
       if(this.flog == false){
         let target = document.getElementById("main__header")
-        console.log(target.classList);
+        // console.log(target.classList);
         target.classList.remove('show')
         target.classList.add('hide')
         return this.flog = true;

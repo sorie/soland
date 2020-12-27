@@ -1,63 +1,33 @@
 <template>
 <div class="container">
-
   <section class="cont__wrapper">
-    <h1>Empty image animation</h1>
-    <div class="cont">
-      <div class="img">
-        <!-- {{item.content.banner_image_url}} -->
-        <!-- <img src="http://stillshot.tving.com/thumbnail/C15841_0_320x180.jpg" alt="" class="a"> -->
-        <!-- <img :src="getBanner(item.content.banner_image_url)" alt="" class="a"> -->
-      </div>
-      <!-- <div class="wrap_cont gul">
-        <p>신서유기4</p>
-        <p>설명설명설명설명설명설명설명설명설명설명설명설명설명</p>
-      </div> -->
+    <h1>if video list</h1>
+    <div class="live-item" v-if="clipdata.results">
+      <a class="img live-item__image" :href="clip.links.html" target="_blank" v-for="(clip, idx) in clipdata.results" :key="`${idx}`">
+        <img :src="clip.urls.small" class="image-cover" :alt="clip.alt_description">
+      </a>
     </div>
   </section>
-  <!-- <div class="swiper-container" v-swiper:mySwiper="swiperOption" v-if="bannerdata.length > 0" ref="swiper"> -->
   <section class="cont__wrapper">
     <h1>Swiper slide component</h1>
-    <swiper class="main-visual-slide type2"  v-swiper:mySwiper="swiperOption">
-      <swiper-slide class="" v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
+    <swiper ref="mySwiper" class="main-visual-slide type2" v-if="bannerdata.results" :options="swiperOption">
+      <swiper-slide v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
         <div class="bg bg-right" :style="`background-color: #${slide.color}`"></div>
         <div class="bg bg-left" :style="`background-color: #${slide.color}`"></div>
         <img :src="getBanner(slide.urls.regular)" class="" :alt="slide.alt_description">
-        <a :href="slide.links.self" target="_self" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
-        <div class="slide_cont vod">    
-          <span class="title">{{slide.alt_description}}</span>                             
-        </div>   
+        <a :href="slide.links.html" target="_blank" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
+          <div class="slide_cont vod">    
+            <span class="title">{{slide.alt_description}}</span>                             
+          </div>   
         </a>
       </swiper-slide>
     </swiper>
-    <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-    <div class="swiper-button-next" slot="button-next"></div> -->
-    
-    <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+    <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div>
+    <div class="swiper-pagination" slot="pagination"></div>
   </section>
   <section class="cont__wrapper">
     <h1>Web RTC</h1>
-    <div class="cont" v-if="clipdata.length > 0">
-      <div class="img">
-        <div v-for="(clip, idx) in clipdata" :key="`${idx}`">
-          {{idx}}
-          <!-- <div v-for="(item, idx) in clip.api_url_item" :key="`${idx}`">
-            <img :src='item.link_url' alt="">
-          </div> -->
-            {{clip.pcu_title}}
-        </div>
-        <!-- {{clip.api_url_item.clip_info.contenttitle}} -->
-        <!-- <img :src="`clipImageUrl(${clip.api_url_item.clip_info.savecontentimg})`"> -->
-        
-        <!-- {{item.content.banner_image_url}} -->
-        <!-- <img src="http://stillshot.tving.com/thumbnail/C15841_0_320x180.jpg" alt="" class="a"> -->
-        <!-- <img :src="getBanner(item.content.banner_image_url)" alt="" class="a"> -->
-      </div>
-      <!-- <div class="wrap_cont gul">
-        <p>신서유기4</p>
-        <p>설명설명설명설명설명설명설명설명설명설명설명설명설명</p>
-      </div> -->
-    </div>
   </section>
 
 </div>
@@ -66,9 +36,10 @@
 import Constant from '../Constant'
 import { mapState } from 'vuex'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-import 'swiper/swiper-bundle.css'
+
 
 export default {
+  name: 'carrousel',
   components: {
     Swiper,
     SwiperSlide
@@ -94,7 +65,11 @@ export default {
         pagination: {
           el: '.swiper-pagination'
         },
-        autoplay: false,
+        autoplay: true,
+        lazy: {
+            loadPrevNext: true,
+            loadPrevNextAmount: 100,
+        },
         on: {
           init: function() {
             // console.log('init');
@@ -111,8 +86,13 @@ export default {
   },
   computed: {
     ...mapState(["bannerdata","clipdata"]),
+    swiper() {
+      return this.$refs.mySwiper.$swiper
+    }
   },
-  mounted : function() {    
+  mounted : function() {   
+    console.log('Current Swiper instance object', this.swiper)
+    this.swiper.slideTo(3, 1000, false) 
     this.$store.dispatch(Constant.FETCH_EVENTSLIDE)
     this.$store.dispatch(Constant.FETCH_CLIP)
   },
@@ -120,10 +100,10 @@ export default {
     getBanner($d) {
       return `${$d}`
     },
-    clipImageUrl($s) {
-      let src="http://image.tving.com/crop.php?u=http://image.tving.com"
-      return src + $s
-    }
+    // clipImageUrl($s) {
+    //   let src="http://image.tving.com/crop.php?u=http://image.tving.com"
+    //   return src + $s
+    // }
   }//methods end
   
 }
@@ -131,18 +111,12 @@ export default {
 <style lang="scss">
 
 .container {
+  position: relative;
   background-color: #000;
   width:100%;
   height:100%;
 }
 .swiper-container{
-  // position: relative;
-  // width: 100%;
-  // margin: auto;
-  // overflow: hidden;
-  // border: 0;
-  // border: 1px solid blue;
-  // box-shadow: none;
   .bg {
     position: absolute;
     top: 0;
@@ -167,6 +141,7 @@ export default {
       img{
         width: 100%;
         object-fit: cover;
+        z-index: 1;
       }
     }
     &.type2 {
@@ -224,6 +199,13 @@ export default {
     }
   }
 
+  
+  .logger_click {
+    position: absolute;
+    top:0;left:0;right:0;bottom:0;
+    z-index: 2;
+  }
+
 }
 .cont__wrapper {
   position: relative;
@@ -232,22 +214,49 @@ export default {
   margin-top: 100px;
   margin-bottom: 100px;
 
-  .cont {
-    .img {
-      // width: 100%;
-      // height: 0;
-      // position: relative;
-      // overflow: hidden;
-      // padding: 56.25% 0;
+  .live-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    transition: transform .3s;
+    &__image {
+      flex: 0 0 33%;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      background-color: #0a0a0a;
+      border-radius: .25rem;
+      transition: box-shadow .4s;
       img {
+        &.image-cover {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          -o-object-fit: cover;
+          object-fit: cover;
+          font-family: "object-fit: cover;";
+          border: 0;
+        }
+      }
+      &:before {
+        content: "";
+        padding-top: 56.25%;
+        float: left;
+      }
+      &:after {
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        object-fit: cover;
+        width: 100%;
+        height: 3px;
+        z-index: 1;
       }
     }
   }
+
 }
 
 .img:empty {
