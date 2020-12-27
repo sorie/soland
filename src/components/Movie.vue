@@ -2,6 +2,7 @@
 <div class="container">
 
   <section class="cont__wrapper">
+    <h1>Empty image animation</h1>
     <div class="cont">
       <div class="img">
         <!-- {{item.content.banner_image_url}} -->
@@ -15,49 +16,35 @@
     </div>
   </section>
   <!-- <div class="swiper-container" v-swiper:mySwiper="swiperOption" v-if="bannerdata.length > 0" ref="swiper"> -->
-  <section class="swiper-container" >
-    <ul class="swiper-wrapper main-visual-slide type2">
-      <!-- <div class="img_center" style="background-image:url(http://image.tving.com/upload/fe/theme/2019/0116/20190116190241bodyfile.jpg)"> -->
-      <!-- <img src="http://image.tving.com/upload/fe/theme/2019/0116/20190116190241bodyfile.jpg" class=""> -->
-      <li class="swiper-slide" v-for="(slide, idx) in bannerdata" :key="`item-newmain-${idx}`">
-        <div class="bg bg-right" :style="`background-color: #${slide.content.background_color_right}`"></div>
-        <div class="bg bg-left" :style="`background-color: #${slide.content.background_color_left}`"></div>
-        <!-- <img :src="getBanner(slide.banner_image_url)" class=""> -->
-        <a href="http://www.tving.com/live/player/C00551" target="_self" :style="`background-image:url(http://image.tving.com${slide.content.banner_image_url})`" class="logger_click" :data-evtname="`${slide.banner_type}/PCV7_MAIN_TOP_ROLLING/${slide.content.banner_title}`" :data-ga_name_data="`${slide.banner_type}/${slide.content.banner_title}`" :data-nethru_clcode="`${slide.banner_type}`">       
-        <!-- background-image: url("http://image.tving.com/upload/fe/highlight/2019/0131/20190131223455banner_image_url_u.png"); -->
-          <div class="slide_cont vod">    
-            <span class="title">{{slide.content.banner_title3}}</span>         
-            <span class="sub"> {{slide.content.banner_sub_title3}} </span>             
-            <span class="sub2" :style="`color: #${slide.content.banner_bc_notice_color}`">{{slide.content.banner_bc_notice}}</span>           
-          </div>   
+  <section class="cont__wrapper">
+    <h1>Swiper slide component</h1>
+    <swiper class="main-visual-slide type2"  v-swiper:mySwiper="swiperOption">
+      <swiper-slide class="" v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
+        <div class="bg bg-right" :style="`background-color: #${slide.color}`"></div>
+        <div class="bg bg-left" :style="`background-color: #${slide.color}`"></div>
+        <img :src="getBanner(slide.urls.regular)" class="" :alt="slide.alt_description">
+        <a :href="slide.links.self" target="_self" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
+        <div class="slide_cont vod">    
+          <span class="title">{{slide.alt_description}}</span>                             
+        </div>   
         </a>
-      </li>
-
-      <!-- <li class="swiper-slide" >
-        <div class="bg bg-right" style="background-color: #000"></div>
-        <div class="bg bg-left" style="background-color: #000"></div>
-        <iframe width="1200" height="380" src="https://www.youtube.com/embed/GNnFNxx4Exw" frameborder="0" allow="autoplay;" allowfullscreen style="height: 380px;margin: 0 auto;"></iframe>
-      </li>
-
-      <li class="swiper-slide" >
-        <div class="bg bg-right" style="background-color: #000"></div>
-        <div class="bg bg-left" style="background-color: #000"></div>
-        <iframe width="1200" height="380" src="https://www.youtube.com/embed/4pHl7I_8rxA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </li>
-       -->
-      <!-- </div> -->
-         
-    </ul>
-    <div class="swiper-button-prev" slot="button-prev"></div>
-    <div class="swiper-button-next" slot="button-next"></div>
+      </swiper-slide>
+    </swiper>
+    <!-- <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div> -->
     
-    <div class="swiper-pagination" slot="pagination"></div>
+    <!-- <div class="swiper-pagination" slot="pagination"></div> -->
   </section>
   <section class="cont__wrapper">
+    <h1>Web RTC</h1>
     <div class="cont" v-if="clipdata.length > 0">
       <div class="img">
         <div v-for="(clip, idx) in clipdata" :key="`${idx}`">
-        {{clip.pcu_title}}
+          {{idx}}
+          <!-- <div v-for="(item, idx) in clip.api_url_item" :key="`${idx}`">
+            <img :src='item.link_url' alt="">
+          </div> -->
+            {{clip.pcu_title}}
         </div>
         <!-- {{clip.api_url_item.clip_info.contenttitle}} -->
         <!-- <img :src="`clipImageUrl(${clip.api_url_item.clip_info.savecontentimg})`"> -->
@@ -78,23 +65,19 @@
 <script>
 import Constant from '../Constant'
 import { mapState } from 'vuex'
-import Swiper from 'swiper/dist/js/swiper.esm.bundle'
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 
 export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
+  },
   data() {
     return {
-      // dummy slides data
-      slides: (function () {
-        var slides = [];
-        for (var i = 0; i < 600; i += 1) {
-          slides.push('Slide ' + (i + 1));
-        }
-        return slides;
-      }()),
-      // virtual data
-      virtualData: {
-        slides: [],
-      },
       swiperOption: {
         loop: true,
         slidesPerView: 'auto',
@@ -114,13 +97,13 @@ export default {
         autoplay: false,
         on: {
           init: function() {
-            console.log('init');
+            // console.log('init');
           },
           slideChange() {
-            console.log('onSlideChangeEnd===>', this);
+            // console.log('onSlideChangeEnd===>', this);
           },
           tap() {
-            console.log('onTap', this);
+            // console.log('onTap', this);
           }
         }
       },
@@ -132,21 +115,10 @@ export default {
   mounted : function() {    
     this.$store.dispatch(Constant.FETCH_EVENTSLIDE)
     this.$store.dispatch(Constant.FETCH_CLIP)
-    const self = this;
-    let swiperOption = this.swiperOption;
-    const swiper = new Swiper('.swiper-container', swiperOption,{
-      virtual: {
-        slides: self.slides,
-        renderExternal() { 
-          // assign virtual slides data
-          self.virtualData = self.bannerdata
-        },
-      },
-    })
   },
   methods: {
     getBanner($d) {
-      return `http://image.tving.com${$d}`
+      return `${$d}`
     },
     clipImageUrl($s) {
       let src="http://image.tving.com/crop.php?u=http://image.tving.com"
@@ -157,37 +129,26 @@ export default {
 }
 </script>
 <style lang="scss">
-ul, menu, dir {
-    display: block;
-    list-style-type: disc;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 0px;
-    margin-right: 0px;
-    padding-left: 0px;
-}
-a {
-  list-style: none;
-  text-decoration: none;
-}
+
 .container {
   background-color: #000;
   width:100%;
   height:100%;
 }
 .swiper-container{
-  position: relative;
-  width: 100%;
-  margin: auto;
-  overflow: hidden;
-  border: 0;
-  border: 1px solid blue;
-  box-shadow: none;
+  // position: relative;
+  // width: 100%;
+  // margin: auto;
+  // overflow: hidden;
+  // border: 0;
+  // border: 1px solid blue;
+  // box-shadow: none;
   .bg {
     position: absolute;
     top: 0;
     bottom: 0;
     background-color: #fff;
+    z-index:-1;
     &-right {
       right: 0;
       left: 50%;
@@ -203,18 +164,9 @@ a {
       &:empty {
         background-color: #ddd;
       }
-      iframe{
-        position: relative;
-      }
-      height: 100%;
-      a {
-        position: relative;
-        display: block;
-        max-width: 1600px;
-        height: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        margin: 0 auto;
+      img{
+        width: 100%;
+        object-fit: cover;
       }
     }
     &.type2 {
@@ -275,7 +227,7 @@ a {
 }
 .cont__wrapper {
   position: relative;
-  width: 1200px;
+  width: 100%;
   margin: auto;
   margin-top: 100px;
   margin-bottom: 100px;

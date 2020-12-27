@@ -13,6 +13,19 @@ export default {
 }
 </script>
 <style>
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+}
+a {
+  list-style: none;
+  text-decoration: none;
+}
 body {
   background-color: black;
   color: #fff;
