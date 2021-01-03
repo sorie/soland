@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <section class="cont__wrapper">
-    <h1>if video list</h1>
+    <h1>photo list</h1>
     <div class="live-item" v-if="clipdata.results">
       <a class="img live-item__image" :href="clip.links.html" target="_blank" v-for="(clip, idx) in clipdata.results" :key="`${idx}`">
         <img :src="clip.urls.small" class="image-cover" :alt="clip.alt_description">
@@ -28,6 +28,7 @@
   </section>
   <section class="cont__wrapper">
     <h1>Web RTC</h1>
+    <lobby-room></lobby-room>
   </section>
 
 </div>
@@ -36,13 +37,15 @@
 import Constant from '../Constant'
 import { mapState } from 'vuex'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import lobbyRoom from '@/components/video-call/lobbyRoom.vue'
 
 
 export default {
   name: 'carrousel',
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    lobbyRoom
   },
   directives: {
     swiper: directive
@@ -65,10 +68,9 @@ export default {
         pagination: {
           el: '.swiper-pagination'
         },
-        autoplay: true,
-        lazy: {
-            loadPrevNext: true,
-            loadPrevNextAmount: 100,
+        autoplay: {
+            delay: 10000,
+            disableOnInteraction: false
         },
         on: {
           init: function() {
