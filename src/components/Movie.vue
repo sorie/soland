@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <section class="cont__wrapper">
-    <h1>photo list</h1>
+    <h1>List of 16:9 proportion pictures with flex</h1>
     <div class="live-item" v-if="clipdata.results">
       <a class="img live-item__image" :href="clip.links.html" target="_blank" v-for="(clip, idx) in clipdata.results" :key="`${idx}`">
         <img :src="clip.urls.small" class="image-cover" :alt="clip.alt_description">
