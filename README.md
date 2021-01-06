@@ -1,4 +1,4 @@
-# soland
+# soland by sori jeong
 ### 개인 프로젝트 
 #### 프론트 프레임워크 : vue.js, nuxt.js
 #### 언어 : javascript, es6, es5, html, css
