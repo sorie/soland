@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/index.vue'
-import About from '@/views/About.vue'
+import List from '@/views/List.vue'
+import Example from '@/views/Example.vue'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
  
 // import style
@@ -15,17 +15,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/Main'
+      redirect: '/List'
     },
     {
-      path: '/Main',
-      name: 'Main',
-      component: Main
+      path: '/List',
+      name: 'List',
+      component: List
     },
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: Example
     }
   ]
 })

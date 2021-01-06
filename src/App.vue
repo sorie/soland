@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <Main></Main>
+    <Index></Index>
   </div>
 </template>
 <script>
-import Main from "@/views/Main.vue"
+import Index from "@/views/index.vue"
 
 export default {
   components : {
-    Main
+    Index
   }
 }
 </script>

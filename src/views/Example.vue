@@ -1,16 +1,16 @@
 <template>
   <div class="about">
-    <Movie/> 
+    <Comp-ex/> 
     <Footer/>
   </div>
 </template>
 <script>
-import Movie from '@/components/Movie.vue'
+import CompEx from '@/components/Conponent_ex.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
   components: {
-    Movie,
+    CompEx,
     Footer
   }
 }

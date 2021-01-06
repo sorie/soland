@@ -1,19 +1,23 @@
 <template>
-  <div class="mainMovie" ref="mainMovie" :style="[mainStyle]">
-    <pro-list></pro-list>
-    <!-- <my-canvas style="width:100%;height:100%">
-    </my-canvas> -->
-  </div>
+  <section class="container">
+    <div class="ListWrap" ref="ListWrap" :style="[mainStyle]">
+      <pro-list></pro-list>
+      <!-- <my-canvas style="width:100%;height:100%">
+      </my-canvas> -->
+    </div>
+    <Footer/>
+  </section>
 </template>
+
 <script>
-// import MyCanvas from '@/components/MyCanvas.vue'
 import ProList from '@/components/ProList.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
-  name: "Header",
+  name: 'List',
   components: {
-    // MyCanvas
-    ProList
+    ProList,
+    Footer
   },
   data() {
     return {
@@ -28,7 +32,7 @@ export default {
   methods: {
     heightResize() {
       let wh = window.innerHeight
-      let mainh = this.$refs.mainMovie
+      let mainh = this.$refs.ListWrap
       mainh.style.height  = wh + 'px'
     }
   },
@@ -41,11 +45,10 @@ a, li {
   text-decoration: none;
 }
 
-.mainMovie {
+.ListWrap {
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
   overflow-y: scroll;
 }
-
 </style>
