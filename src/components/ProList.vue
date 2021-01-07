@@ -1,6 +1,7 @@
 /* 프로젝트 리스트 */
 <template>
   <div class="mainTable">
+    <div class="tableWrap">
       <table>
         <thead>
           <tr>
@@ -19,6 +20,7 @@
         </tbody>
       </table>
     </div>
+  </div>
 </template>
 <script>
 import prjecList from '../static/prjecList.json'
@@ -46,11 +48,15 @@ export default {
 <style lang="scss" scoped>
 .mainTable {
   max-width: 1200px;
-  margin: auto;
-  padding: 2rem;
+  margin: 7rem auto;
+  overflow-x:hidden;
+  .tableWrap{
+    width: calc(100% + 20px);
+    height: 937px;
+    overflow-y: scroll;
+  }
   table {
     background:rgba(255,255,255,0.1);
-    margin-top: 7rem;
     border-collapse: collapse;
     thead {
       border-top: 1px solid white;

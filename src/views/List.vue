@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted() {
-    this.heightResize()
+    // this.heightResize()
   },
   methods: {
     heightResize() {
@@ -46,9 +46,8 @@ a, li {
 }
 
 .ListWrap {
-  height: 100vh;
+  height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  overflow-y: scroll;
 }
 </style>

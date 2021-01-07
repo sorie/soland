@@ -1,10 +1,10 @@
 <template>
   <div class="main">
     <div class="main__header" id="main__header">
-      <router-link to="/List" class="logo">soland</router-link>
+      <router-link to="/List" class="logo">Sori Jeong</router-link>
       <ul class="menu">
-        <router-link to="/List">list</router-link>
-        <router-link to="/about">components</router-link>
+        <router-link to="/List">List</router-link>
+        <router-link to="/about">Components</router-link>
       </ul>
       <span class="main__header-hide" v-on:click="headHide"></span>
     </div>
