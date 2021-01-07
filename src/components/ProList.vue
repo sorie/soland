@@ -1,24 +1,26 @@
 /* 프로젝트 리스트 */
 <template>
-  <div class="mainTable">
-    <div class="tableWrap">
-      <table>
-        <thead>
-          <tr>
-            <td v-for="(item, idx) in project.titlename" :key="`item-newmain-${idx}`">{{project.titlename[idx]}}</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, idx) in projectListVal.items" :key="`item-newmain-${idx}`">
-            <td>{{item.name}}</td>
-            <td v-html=item.date>{{item.date}}</td>
-            <td>{{item.workspace}}</td>
-            <td>{{item.language}}</td>
-            <td v-html=item.role></td>
-            <td>{{item.type}}</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="projects" ref="projects" :style="[mainStyle]">
+    <div class="mainTable">
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <td v-for="(item, idx) in project.titlename" :key="`item-newmain-${idx}`">{{project.titlename[idx]}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, idx) in projectListVal.items" :key="`item-newmain-${idx}`">
+              <td>{{item.name}}</td>
+              <td v-html=item.date>{{item.date}}</td>
+              <td>{{item.workspace}}</td>
+              <td>{{item.language}}</td>
+              <td v-html=item.role></td>
+              <td>{{item.type}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -28,7 +30,10 @@ import prjecList from '../static/prjecList.json'
 export default {
   data(){
     return{
-      project:prjecList
+      project:prjecList,
+      mainStyle : {
+        backgroundImage: 'url(http://films.bybrettjohnson.com/img/tn-aquarium.gif)'
+      }
     }
   }, 
   computed:{
@@ -41,13 +46,30 @@ export default {
       });
       return this.project;
     }
-  }
+  },
+  mounted() {
+    // this.heightResize()
+  },
+  methods: {
+    heightResize() {
+      let wh = window.innerHeight
+      let mainh = this.$refs.projects
+      mainh.style.height  = wh + 'px'
+    }
+  },
 }
 </script>
 // scoped 속성을 가지고있을 때, CSS는 현재 컴포넌트의 엘리먼트에만 적용
 <style lang="scss" scoped>
+.projects {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
 .mainTable {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 7rem auto;
   overflow-x:hidden;
   .tableWrap{

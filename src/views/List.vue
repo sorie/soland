@@ -1,12 +1,8 @@
 <template>
-  <section class="container">
-    <div class="ListWrap" ref="ListWrap" :style="[mainStyle]">
-      <pro-list></pro-list>
-      <!-- <my-canvas style="width:100%;height:100%">
-      </my-canvas> -->
-    </div>
+  <div class="container">
+    <proList/>
     <Footer/>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -19,35 +15,5 @@ export default {
     ProList,
     Footer
   },
-  data() {
-    return {
-      mainStyle : {
-        backgroundImage: 'url(http://films.bybrettjohnson.com/img/tn-aquarium.gif)'
-      }
-    }
-  },
-  mounted() {
-    // this.heightResize()
-  },
-  methods: {
-    heightResize() {
-      let wh = window.innerHeight
-      let mainh = this.$refs.ListWrap
-      mainh.style.height  = wh + 'px'
-    }
-  },
 }
 </script>
-<style lang="scss">
-a, li {
-  color: #f00;
-  list-style: none;
-  text-decoration: none;
-}
-
-.ListWrap {
-  height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-</style>

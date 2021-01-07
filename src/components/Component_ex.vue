@@ -1,7 +1,7 @@
 <template>
-<div class="container">
+<div class="components">
   <section class="cont__wrapper">
-    <h1>List of 16:9 proportion pictures with flex</h1>
+    <h1>List of 16:9 proportion pictures with grid</h1>
     <div class="live-item" v-if="clipdata.results">
       <a class="img live-item__image" :href="clip.links.html" target="_blank" v-for="(clip, idx) in clipdata.results" :key="`${idx}`">
         <img :src="clip.urls.small" class="image-cover" :alt="clip.alt_description">
@@ -14,12 +14,13 @@
       <swiper-slide v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
         <div class="bg bg-right" :style="`background-color: #${slide.color}`"></div>
         <div class="bg bg-left" :style="`background-color: #${slide.color}`"></div>
-        <img :src="getBanner(slide.urls.regular)" class="" :alt="slide.alt_description">
+        <img :src="getBanner(slide.urls.regular)"  class="swiper-lazy" :alt="slide.alt_description">
         <a :href="slide.links.html" target="_blank" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
           <div class="slide_cont vod">    
             <span class="title">{{slide.alt_description}}</span>                             
           </div>   
         </a>
+        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
       </swiper-slide>
     </swiper>
     <div class="swiper-button-prev" slot="button-prev"></div>
@@ -38,10 +39,11 @@ import Constant from '../Constant'
 import { mapState } from 'vuex'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import lobbyRoom from '@/components/video-call/lobbyRoom.vue'
-
+import vueLazyLoad from "vue-lazyload";
+import 'swiper/css/swiper.css'
 
 export default {
-  name: 'carrousel',
+  name: 'component_ex',
   components: {
     Swiper,
     SwiperSlide,
@@ -55,12 +57,11 @@ export default {
       swiperOption: {
         loop: true,
         slidesPerView: 'auto',
-        centeredSlides: true,
-        // spaceBetween: 30,
-        lazy: {
-            loadPrevNext: true,
-            loadPrevNextAmount: 100,
-        },
+        // centeredSlides: true,
+        // effect: 'fade',
+        spaceBetween: 30,
+        lazy: true,
+        // autoHeight: true, //enable auto height
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
@@ -68,10 +69,10 @@ export default {
         pagination: {
           el: '.swiper-pagination'
         },
-        autoplay: {
-            delay: 10000,
-            disableOnInteraction: false
-        },
+        // autoplay: {
+        //     delay: 10000,
+        //     disableOnInteraction: false
+        // },
         on: {
           init: function() {
             // console.log('init');
@@ -97,6 +98,11 @@ export default {
     this.swiper.slideTo(3, 1000, false) 
     this.$store.dispatch(Constant.FETCH_EVENTSLIDE)
     this.$store.dispatch(Constant.FETCH_CLIP)
+
+    // Vue.use(vueLazyLoad, {
+    //     lazyComponent: true,
+    //     listenEvents: [ 'scroll' ]
+    // })
   },
   methods: {
     getBanner($d) {
@@ -111,14 +117,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
-.container {
-  position: relative;
-  background-color: #000;
-  width:100%;
-  height:100%;
-}
 .swiper-container{
+  height: 500px;
   .bg {
     position: absolute;
     top: 0;
@@ -138,7 +138,7 @@ export default {
     height: 380px;
     .swiper-slide {
       &:empty {
-        background-color: #ddd;
+        background-color: rgb(37, 31, 31);
       }
       img{
         width: 100%;
@@ -200,8 +200,6 @@ export default {
       }
     }
   }
-
-  
   .logger_click {
     position: absolute;
     top:0;left:0;right:0;bottom:0;
@@ -217,19 +215,52 @@ export default {
   margin-bottom: 100px;
 
   .live-item {
-    display: flex;
-    flex-wrap: wrap;
+    width:100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+		" a . b . "
+		" . c . e "
+		" f . g . "
+		" . h . i ";
     margin: 0;
     transition: transform .3s;
     &__image {
-      flex: 0 0 33%;
-      display: block;
       position: relative;
-      overflow: hidden;
-      background-color: #0a0a0a;
+      background-color: #ddd;
       border-radius: .25rem;
       transition: box-shadow .4s;
+      &:nth-child(1){
+        grid-area: a;
+      }
+      &:nth-child(2){
+        grid-area: b;
+      }
+      &:nth-child(3){
+        grid-area: c;
+      }
+      &:nth-child(4){
+        grid-area: d;
+      }
+      &:nth-child(5){
+        grid-area: e;
+      }
+      &:nth-child(6){
+        grid-area: f;
+      }
+      &:nth-child(7){
+        grid-area: g;
+      }
+      &:nth-child(8){
+        grid-area: h;
+      }
+      &:nth-child(9){
+        grid-area: i;
+      }
       img {
+        &:empty{
+          opacity: 0;
+        }
         &.image-cover {
           position: absolute;
           top: 0;
@@ -238,9 +269,13 @@ export default {
           height: 100%;
           -o-object-fit: cover;
           object-fit: cover;
-          font-family: "object-fit: cover;";
           border: 0;
+          opacity: 1;
+          transition: opacity 1s;
         }
+      }
+      img[lazy='loaded'] {
+        opacity: 1;
       }
       &:before {
         content: "";
@@ -261,8 +296,8 @@ export default {
 
 }
 
-.img:empty {
-  width: 1200px;
+.live-item:empty {
+  width: 100%;
   height: 600px;
   
   background-image:
