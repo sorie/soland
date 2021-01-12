@@ -39,7 +39,7 @@ import Constant from '../Constant'
 import { mapState } from 'vuex'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import lobbyRoom from '@/components/video-call/lobbyRoom.vue'
-import vueLazyLoad from "vue-lazyload";
+// import vueLazyLoad from "vue-lazyload";
 import 'swiper/css/swiper.css'
 
 export default {

@@ -97,12 +97,12 @@ export default {
     .menu {
       max-width: 1200px;
       line-height: 70px;
-      color:red;
       font-weight: 800;
+      font-size: 1.1rem;
       a {
-        cursor: pointer;
-        color: red;
         display: inline-block;
+        color: #9c0012;
+        cursor: pointer;
         &:not(:last-child){
           margin-right: 10px;
         }
