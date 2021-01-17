@@ -61,7 +61,6 @@
 </template>
 <script>
 import adapter from 'webrtc-adapter';
-import $ from 'jquery';
 
 export default {
     name: "LobbyRoom", 
@@ -143,360 +142,377 @@ export default {
     },
     methods: {
       changedevice(type, devicelabel, deviceid){
-          $("#btn_start").attr('disabled', true);
-          let changedevice = false;
-          let selectdevice = GLOBAL.transStrToObj(sessionStorage.getItem('selectdevice'));
-          if(type==='video'){
-              if(devicelabel!==selectdevice.video.label){
-                  changedevice = true;
-              }
-              this.selectvideodevice = devicelabel;
-              selectdevice.video = {label: devicelabel, deviceId: deviceid};
-          }
-          else if(type==='mic'){
-              if(devicelabel!==selectdevice.audio.label){
-                  changedevice = true;
-              }
-              this.selectmicdevice = devicelabel;
-              selectdevice.audio = {label: devicelabel, deviceId: deviceid};
-          }
+        const btn_start = document.querySelector('#btn_start');
+        let changedevice = false;
+        let selectdevice = GLOBAL.transStrToObj(sessionStorage.getItem('selectdevice'));
 
-          if(changedevice){
-              // Main을 Session을 다시 진행 해야 함.
-              let devicestatus = this.myinfo.devicestatus;
-              sessionStorage.setItem('selectdevice', GLOBAL.transObjToStr(selectdevice));
-              if(devicestatus==='all'){
-                  ucEngine.Video.changeDevice({type: 'main', mode: 'changedevice',  devicetype: this.config.APP.devicetype, devicestatus: devicestatus, videodeviceid: selectdevice.video.deviceId, audiodeviceid: selectdevice.audio.deviceId, changeDevice: function(param){
-                      $("#btn_start").attr('disabled', false);
-                  }.bind(this)});
-              }
-              else if(devicestatus==='audioonly'){
-                  ucEngine.Video.changeDevice({type: 'main', mode: 'changedevice',  devicetype: this.config.APP.devicetype, devicestatus: devicestatus, audiodeviceid: selectdevice.audio.deviceId, changeDevice: function(param){
-                      $("#btn_start").attr('disabled', false);
-                  }.bind(this)});
-              }
+        btn_start.setAttribute('disabled', true);
+
+        if(type==='video'){
+          if(devicelabel!==selectdevice.video.label){
+            changedevice = true;
           }
+          this.selectvideodevice = devicelabel;
+          selectdevice.video = {label: devicelabel, deviceId: deviceid};
+        }
+        else if(type==='mic'){
+          if(devicelabel!==selectdevice.audio.label){
+            changedevice = true;
+          }
+          this.selectmicdevice = devicelabel;
+          selectdevice.audio = {label: devicelabel, deviceId: deviceid};
+        }
+
+        if(changedevice){
+          // Main을 Session을 다시 진행 해야 함.
+          let devicestatus = this.myinfo.devicestatus;
+          sessionStorage.setItem('selectdevice', GLOBAL.transObjToStr(selectdevice));
+          if(devicestatus==='all'){
+            ucEngine.Video.changeDevice({type: 'main', mode: 'changedevice',  devicetype: this.config.APP.devicetype, devicestatus: devicestatus, videodeviceid: selectdevice.video.deviceId, audiodeviceid: selectdevice.audio.deviceId, changeDevice: function(param){
+              btn_start.setAttribute('disabled', false);
+            }.bind(this)});
+          }
+          else if(devicestatus==='audioonly'){
+            ucEngine.Video.changeDevice({type: 'main', mode: 'changedevice',  devicetype: this.config.APP.devicetype, devicestatus: devicestatus, audiodeviceid: selectdevice.audio.deviceId, changeDevice: function(param){
+              btn_start.setAttribute('disabled', false);
+            }.bind(this)});
+          }
+        }
       },
 
       getLocalStream(stream){
-          let video = document.querySelector("#my_Video");
-          if(video!==undefined&&video!==null){
-              if(!video.paused){
-                  video.pause();
-                  video.src = '';
-                  video.load();
-              }
-              video.srcObject = stream;
-              video.muted = true;
+        const video = document.querySelector("#my_Video");
+        const btn_start = document.querySelector('#btn_start');
+        if(video!==undefined&&video!==null){
+          if(!video.paused){
+            video.pause();
+            video.src = '';
+            video.load();
+          }
+          video.srcObject = stream;
+          video.muted = true;
+        }
+
+        if(this.myinfo.devicestatus==='all'){
+          if(this.myinfo.mstate==='audioonly' || this.myinfo.mstate==='none'){
+            stream.getVideoTracks()[0].enabled = false;
           }
 
-          if(this.myinfo.devicestatus==='all'){
-              if(this.myinfo.mstate==='audioonly' || this.myinfo.mstate==='none'){
-                  stream.getVideoTracks()[0].enabled = false;
-              }
+          if(this.myinfo.mstate==='videoonly' || this.myinfo.mstate==='none'){
+            stream.getAudioTracks()[0].enabled = false;
+          }
+        }
+        else if(this.myinfo.devicestatus==='audioonly'){
+          if(this.myinfo.mstate==='none'){
+            stream.getAudioTracks()[0].enabled = true;
+          }
+        }
+        else if(this.myinfo.devicestatus==='videoonly'){
+          if(this.myinfo.mstate==='none'){
+            stream.getVideoTracks()[0].enabled = true;
+          }
+        }
 
-              if(this.myinfo.mstate==='videoonly' || this.myinfo.mstate==='none'){
-                  stream.getAudioTracks()[0].enabled = false;
-              }
-          }
-          else if(this.myinfo.devicestatus==='audioonly'){
-              if(this.myinfo.mstate==='none'){
-                  stream.getAudioTracks()[0].enabled = true;
-              }
-          }
-          else if(this.myinfo.devicestatus==='videoonly'){
-              if(this.myinfo.mstate==='none'){
-                  stream.getVideoTracks()[0].enabled = true;
-              }
-          }
-
-          this.videoloaded = true;
-          $("#btn_save").attr('disabled', false);
+        this.videoloaded = true;
+        btn_start.setAttribute('disabled', false);
       },
 
       getLocalStreamFail(error){
-          GLOBAL.error("Get Local Stream Fail = " + error.message);
+        GLOBAL.error("Get Local Stream Fail = " + error.message);
       },
 
       onStreamStatusChange(event){
         if(!this.ignorestreamchange){
-            let streamtype = event.target.kind;
-            let streamstatus = null;
-            let devicestatus = this.myinfo.devicestatus;
+          const streamstatus = null;
+          const streamtype = event.target.kind;
+          const devicestatus = this.myinfo.devicestatus;
 
-            if(event.target.readyState==='ended'){
-                streamstatus = 'ended';
+          if(event.target.readyState==='ended'){
+            streamstatus = 'ended';
+          }
+          else{
+            if(event.target.muted){
+                streamstatus = 'muted';
             }
             else{
-                if(event.target.muted){
-                    streamstatus = 'muted';
-                }
-                else{
-                    streamstatus = 'unmuted';
-                }
+                streamstatus = 'unmuted';
             }
+          }
 
-            this.changeMediaStatus(streamtype, (streamstatus==='muted'||streamstatus==='ended')?true:false);
+          this.changeMediaStatus(streamtype, (streamstatus==='muted'||streamstatus==='ended')?true:false);
         }
     },
 
-      startmeeting(){
-        console.log('start');
-      },
-      getDeviceList(devices){
-          let selectvideodevice = null;
-          let selectmicdevice = null;
-          if(devices.length > 0){
-              devices.forEach(function(device){
-                  if(device.kind==="audioinput"){
-                      if(device.deviceId!=='communications' && device.deviceId!=='default'){
-                          this.micdevicelist.push(device);
-                      }
-                  }
-                  else if(device.kind==="videoinput"){
-                      if(this.myinfo.devicestatus==='all' || this.myinfo.devicestatus==='videoonly'){
-                          this.videodevicelist.push(device);
-                      }
-                  }
-              }.bind(this));
+    startmeeting(){
+      console.log('start');
+    },
+    getDeviceList(devices){
+        let selectvideodevice = null;
+        let selectmicdevice = null;
+        const cameraselect = document.querySelector('#cameraselect');
 
-              if(this.videodevicelist.length>0){
-                  this.selectvideodevice = this.videodevicelist[0].label;
-                  selectvideodevice =  {label: this.videodevicelist[0].label, deviceId:this.videodevicelist[0].deviceId};
-              }
-              else{
-                  $("#cameraselect").addClass('disable');
-                  this.selectvideodevice = 'No Camera detected.';
-                  this.mediaonoff('cam', true);
-              }
+        if(devices.length > 0){
+            devices.forEach(function(device){
+                if(device.kind==="audioinput"){
+                    if(device.deviceId!=='communications' && device.deviceId!=='default'){
+                        this.micdevicelist.push(device);
+                    }
+                }
+                else if(device.kind==="videoinput"){
+                    if(this.myinfo.devicestatus==='all' || this.myinfo.devicestatus==='videoonly'){
+                        this.videodevicelist.push(device);
+                    }
+                }
+            }.bind(this));
 
-              if(this.micdevicelist.length>0){
-                  this.selectmicdevice = this.micdevicelist[0].label;
-                  selectmicdevice =  {label:this.micdevicelist[0].label, deviceId:this.micdevicelist[0].deviceId};
-              }
-              else{
-                  this.selectmicdevice = 'No Mic detected.';
-                  this.mediaonoff('mic', true);
-              }
-              this.checkdevice = true;
-              sessionStorage.setItem('selectdevice', GLOBAL.transObjToStr({video: selectvideodevice, audio: selectmicdevice}));
-              ucEngine.Video.getViewer({type: 'self', viewerid: this.myinfo.userid, devicetype: this.adapter.browserDetails.browser, onSuccess: this.onSuccessGetViewer.bind(this), onFail: this.onFailGetViewer.bind(this)});
+            if(this.videodevicelist.length>0){
+                this.selectvideodevice = this.videodevicelist[0].label;
+                selectvideodevice =  {label: this.videodevicelist[0].label, deviceId:this.videodevicelist[0].deviceId};
+            }
+            else{
+                cameraselect.classList.add('disable');
+                this.selectvideodevice = 'No Camera detected.';
+                this.mediaonoff('cam', true);
+            }
+
+            if(this.micdevicelist.length>0){
+                this.selectmicdevice = this.micdevicelist[0].label;
+                selectmicdevice =  {label:this.micdevicelist[0].label, deviceId:this.micdevicelist[0].deviceId};
+            }
+            else{
+                this.selectmicdevice = 'No Mic detected.';
+                this.mediaonoff('mic', true);
+            }
+            this.checkdevice = true;
+            sessionStorage.setItem('selectdevice', GLOBAL.transObjToStr({video: selectvideodevice, audio: selectmicdevice}));
+            ucEngine.Video.getViewer({type: 'self', viewerid: this.myinfo.userid, devicetype: this.adapter.browserDetails.browser, onSuccess: this.onSuccessGetViewer.bind(this), onFail: this.onFailGetViewer.bind(this)});
+        }
+    },
+
+    onSuccessGetViewer(event){
+        let video = document.querySelector("#my_Video");
+        const btn_start = document.querySelector('#btn_start');
+
+        if(video!==undefined&&video!==null){
+            if(!video.paused){
+                video.pause();
+                video.src = '';
+                video.load();
+            }
+            video.srcObject = event.streams[0];
+            video.muted = true;
+
+            btn_start.setAttribute('disabled', false);
+
+            let WIDTH=220;
+            let HEIGHT=50;
+            let rafID  = null;
+
+            let canvasContext = document.getElementById( "meter" ).getContext("2d");
+            // monkeypatch Web Audio
+            window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
+            // grab an audio context
+            let audioContext = new AudioContext();
+            let createAudioMeter = function(audioContext,clipLevel,averaging,clipLag){
+                let processor = audioContext.createScriptProcessor(512);
+                processor.onaudioprocess = function(event){
+                    let buf = event.inputBuffer.getChannelData(0);
+                    let bufLength = buf.length;
+                    let sum = 0;
+                    let x;
+
+                    // Do a root-mean-square on the samples: sum up the squares...
+                    for (let i=0; i<bufLength; i++) {
+                        x = buf[i];
+                        if (Math.abs(x)>=this.clipLevel) {
+                            this.clipping = true;
+                            this.lastClip = window.performance.now();
+                        }
+                        sum += x * x;
+                    }
+
+                    // ... then take the square root of the sum.
+                    let rms =  Math.sqrt(sum / bufLength);
+
+                    // Now smooth this out with the averaging factor applied
+                    // to the previous sample - take the max here because we
+                    // want "fast attack, slow release."
+                    this.volume = Math.max(rms, this.volume*this.averaging);
+                };
+
+                processor.clipping = false;
+                processor.lastClip = 0;
+                processor.volume = 0;
+                processor.clipLevel = clipLevel || 0.98;
+                processor.averaging = averaging || 0.95;
+                processor.clipLag = clipLag || 750;
+
+                // this will have no effect, since we don't copy the input to the output,
+                // but works around a current Chrome bug.
+                processor.connect(audioContext.destination);
+
+                processor.checkClipping = function(){
+                    if (!this.clipping) {
+                        return false;
+                    }
+                    if ((this.lastClip + this.clipLag) < window.performance.now()){
+                        this.clipping = false;
+                    }
+                    return this.clipping;
+                };
+
+                processor.shutdown = function(){
+                    this.disconnect();
+                    this.onaudioprocess = null;
+                };
+
+                return processor;
+            };
+
+            let mediaStreamSource = audioContext.createMediaStreamSource(event.streams[0]);
+
+            // Create a new volume meter and connect it.
+            let meter = createAudioMeter(audioContext);
+            mediaStreamSource.connect(meter);
+
+            // kick off the visual updating
+            let drawLoop = function drawLoop( time ) {
+                // clear the background
+                canvasContext.clearRect(0,0,WIDTH,HEIGHT);
+                canvasContext.fillStyle = "rgba(22,4,83,1)"
+                // draw a bar based on the current volume
+                canvasContext.fillRect(0, 0, meter.volume*WIDTH*2, HEIGHT);
+                // set up the next visual callback
+                rafID = window.requestAnimationFrame( drawLoop );
+            };
+            drawLoop();
+        }
+    },
+
+    onFailGetViewer(error){
+      GLOBAL.error("Get Self Viewer Fail = " + error.message);
+    },
+
+    getDeviceFail(error){
+      GLOBAL.error("Get Device Info Fail in lobby name =  " + error.name + " message = " + error.message);
+      // ucEngine.webSocketSend( [ 'ping.sys.conn', [ 'openvc', GLOBAL.getEncData( 'device.uuid' ) ] ], '##### CLIENT CONSOLE MSG : [ ConfID = ' + GLOBAL_MODULE.getConfID() + ', id = ' + GLOBAL.getMyID()  + ", Get Device Info Fail in lobby name =  " + error.name + ", message = " + error.message + '] #####' );
+    },
+
+    dropdown(type){
+      const selectvideo = document.querySelector('#selectvideo');
+      const videolist = document.querySelector('#videolist');
+      const selectmic = document.querySelector('#selectmic');
+      const miclist = document.querySelector('#miclist');
+
+        if(this.lobbytimer){
+            clearTimeout(this.lobbytimer);
+        }
+
+        if(type==="video"){
+            if(this.videodevicelist.length===0){
+                return false;
+            }
+            if(!selectvideo.classList.contains("select-arrow-active")){
+                selectvideo.classList.add("select-arrow-active");
+            }
+            else{
+                selectvideo.classList.remove("select-arrow-active");
+            }
+
+            if(videolist.classList.contains("select-hide")){
+                videolist.classList.remove('select-hide');
+            }
+            else{
+                videolist.classList.add('select-hide');
+            }
+        }
+        else{
+            if(this.micdevicelist.length===0){
+                return false;
+            }
+            if(!selectmic.classList.contains("select-arrow-active")){
+                selectmic.classList.add("select-arrow-active");
+            }
+            else{
+                selectmic.classList.remove("select-arrow-active");
+            }
+
+            if(miclist.classList.contains("select-hide")){
+                miclist.classList.remove('select-hide');
+            }
+            else{
+                miclist.classList.add('select-hide');
+            }
+        }
+    },
+
+    mediaonoff(type){
+      if(this.lobbytimer){
+          clearTimeout(this.lobbytimer);
+      }
+
+      if(type==="cam"){
+        const cameraBg = document.querySelector('.cameraBg');
+        const videolist = document.querySelector('#videolist');
+        const pCam = document.querySelector('#pCam');
+
+        if(cameraBg.classList.contains('on') && this.videodevicelist.length===0){
+            return false;
+        }
+        cameraBg.classList.toggle('on');
+        pCam.classList.toggle('on');
+        if(pCam.classList.contains('on')){
+          pCam.children[0].textContent = LOCALE.title.cameraoff;
+          pCam.children[0].classList.remove("current");
+          pCam.previousSibling.textContent = LOCALE.title.cameraon;
+          // unmute
+          this.mediamute.video = false;
+          videolist.removeAttribute('disabled');
+          cameraBg.setAttribute('style','display:none;');
+        }
+        else{
+          pCam.children[0].textContent = LOCALE.title.cameraoff;
+          pCam.children[0].classList.add("current");
+          pCam.previousSibling.textContent = LOCALE.title.cameraoff;
+          // mute
+          setTimeout(() => {
+            this.mediamute.video = true;
+            videolist.setAttribute('disabled', 'disabled');
+            cameraBg.setAttribute('style','');
+          }, 1000);
+        }
+      }
+      else{
+          if(this.micdevicelist.length===0){
+              return false;
           }
-      },
+          const soundBg = document.querySelector('.soundBg');
+          const miclist = document.querySelector('#miclist');
+          const pAudio = document.querySelector('#pAudio');
 
-      onSuccessGetViewer(event){
-          let video = document.querySelector("#my_Video");
-          if(video!==undefined&&video!==null){
-              if(!video.paused){
-                  video.pause();
-                  video.src = '';
-                  video.load();
-              }
-              video.srcObject = event.streams[0];
-              video.muted = true;
-
-              $("#btn_start").attr('disabled', false);
-
-              let WIDTH=220;
-              let HEIGHT=50;
-              let rafID  = null;
-
-              let canvasContext = document.getElementById( "meter" ).getContext("2d");
-              // monkeypatch Web Audio
-              window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
-              // grab an audio context
-              let audioContext = new AudioContext();
-              let createAudioMeter = function(audioContext,clipLevel,averaging,clipLag){
-                  let processor = audioContext.createScriptProcessor(512);
-                  processor.onaudioprocess = function(event){
-                      let buf = event.inputBuffer.getChannelData(0);
-                      let bufLength = buf.length;
-                      let sum = 0;
-                      let x;
-
-                      // Do a root-mean-square on the samples: sum up the squares...
-                      for (let i=0; i<bufLength; i++) {
-                          x = buf[i];
-                          if (Math.abs(x)>=this.clipLevel) {
-                              this.clipping = true;
-                              this.lastClip = window.performance.now();
-                          }
-                          sum += x * x;
-                      }
-
-                      // ... then take the square root of the sum.
-                      let rms =  Math.sqrt(sum / bufLength);
-
-                      // Now smooth this out with the averaging factor applied
-                      // to the previous sample - take the max here because we
-                      // want "fast attack, slow release."
-                      this.volume = Math.max(rms, this.volume*this.averaging);
-                  };
-
-                  processor.clipping = false;
-                  processor.lastClip = 0;
-                  processor.volume = 0;
-                  processor.clipLevel = clipLevel || 0.98;
-                  processor.averaging = averaging || 0.95;
-                  processor.clipLag = clipLag || 750;
-
-                  // this will have no effect, since we don't copy the input to the output,
-                  // but works around a current Chrome bug.
-                  processor.connect(audioContext.destination);
-
-                  processor.checkClipping = function(){
-                      if (!this.clipping) {
-                          return false;
-                      }
-                      if ((this.lastClip + this.clipLag) < window.performance.now()){
-                          this.clipping = false;
-                      }
-                      return this.clipping;
-                  };
-
-                  processor.shutdown = function(){
-                      this.disconnect();
-                      this.onaudioprocess = null;
-                  };
-
-                  return processor;
-              };
-
-              let mediaStreamSource = audioContext.createMediaStreamSource(event.streams[0]);
-
-              // Create a new volume meter and connect it.
-              let meter = createAudioMeter(audioContext);
-              mediaStreamSource.connect(meter);
-
-              // kick off the visual updating
-              let drawLoop = function drawLoop( time ) {
-                  // clear the background
-                  canvasContext.clearRect(0,0,WIDTH,HEIGHT);
-                  canvasContext.fillStyle = "rgba(22,4,83,1)"
-                  // draw a bar based on the current volume
-                  canvasContext.fillRect(0, 0, meter.volume*WIDTH*2, HEIGHT);
-                  // set up the next visual callback
-                  rafID = window.requestAnimationFrame( drawLoop );
-              };
-              drawLoop();
-          }
-      },
-
-      onFailGetViewer(error){
-          GLOBAL.error("Get Self Viewer Fail = " + error.message);
-      },
-
-      getDeviceFail(error){
-          GLOBAL.error("Get Device Info Fail in lobby name =  " + error.name + " message = " + error.message);
-          // ucEngine.webSocketSend( [ 'ping.sys.conn', [ 'openvc', GLOBAL.getEncData( 'device.uuid' ) ] ], '##### CLIENT CONSOLE MSG : [ ConfID = ' + GLOBAL_MODULE.getConfID() + ', id = ' + GLOBAL.getMyID()  + ", Get Device Info Fail in lobby name =  " + error.name + ", message = " + error.message + '] #####' );
-      },
-      dropdown(type){
-          if(this.lobbytimer){
-              clearTimeout(this.lobbytimer);
-          }
-
-          if(type==="video"){
-              if(this.videodevicelist.length===0){
-                  return false;
-              }
-              if(!$("#selectvideo").hasClass("select-arrow-active")){
-                  $("#selectvideo").addClass("select-arrow-active");
-              }
-              else{
-                  $("#selectvideo").removeClass("select-arrow-active");
-              }
-
-              if($("#videolist").hasClass("select-hide")){
-                  $("#videolist").removeClass('select-hide');
-              }
-              else{
-                  $("#videolist").addClass('select-hide');
-              }
+          soundBg.classList.toggle('on');
+          pAudio.classList.toggle('on');
+          if(pAudio.classList.contains('on')){
+            pAudio.children[0].textContent = LOCALE.title.cameraon;
+            pAudio.children[0].classList.remove("current");
+            pAudio.previousSibling.textContent = LOCALE.title.cameraon;
+            // unmute
+            this.mediamute.audio = false;
+            miclist.removeAttribute('disabled');
           }
           else{
-              if(this.micdevicelist.length===0){
-                  return false;
-              }
-              if(!$("#selectmic").hasClass("select-arrow-active")){
-                  $("#selectmic").addClass("select-arrow-active");
-              }
-              else{
-                  $("#selectmic").removeClass("select-arrow-active");
-              }
+            pAudio.children[0].textContent = LOCALE.title.cameraoff;
+            pAudio.children[0].classList.add("current");
+            pAudio.previousSibling.textContent = LOCALE.title.cameraoff;
+            // mute
+            this.mediamute.audio = true;
+            miclist.setAttribute('disabled', 'disabled');
+          }
+      }
+    },
 
-              if($("#miclist").hasClass("select-hide")){
-                  $("#miclist").removeClass('select-hide');
-              }
-              else{
-                  $("#miclist").addClass('select-hide');
-              }
-          }
-      },
-      mediaonoff(type){
-          if(this.lobbytimer){
-              clearTimeout(this.lobbytimer);
-          }
-
-          if(type==="cam"){
-              if($(".cameraBg").hasClass("on") && this.videodevicelist.length===0){
-                  return false;
-              }
-              $(".cameraBg").toggleClass("on");
-              let camradiovtndom = $("#pCam");
-              camradiovtndom.toggleClass("on");
-              if(camradiovtndom.hasClass("on")){
-                camradiovtndom.children("button").text(LOCALE.title.cameraoff).removeClass("current");
-                // camradiovtndom.children("button").text("Off").removeClass("current");
-                camradiovtndom.prev("strong").text(LOCALE.title.cameraon);
-                // camradiovtndom.prev("strong").text("On");
-                // unmute
-                this.mediamute.video = false;
-                $("#videolist").removeAttr('disabled');
-                $('.popVideo .cameraBg').hide();
-              }
-              else{
-                camradiovtndom.children("button").text(LOCALE.title.cameraoff).addClass("current");
-                // camradiovtndom.children("button").text("Off").addClass("current");
-                camradiovtndom.prev("strong").text(LOCALE.title.cameraoff);
-                // camradiovtndom.prev("strong").text("Off");
-                // mute
-                setTimeout(() => {
-                  this.mediamute.video = true;
-                  $("#videolist").attr('disabled', 'disabled');
-                  $('.popVideo .cameraBg').show();
-                }, 1000);
-              }
-          }
-          else{
-              if(this.micdevicelist.length===0){
-                  return false;
-              }
-              $(".soundBg").toggleClass("on");
-              let camradiovtndom = $("#pAudio");
-              camradiovtndom.toggleClass("on");
-              if(camradiovtndom.hasClass("on")){
-                  camradiovtndom.children("button").text(LOCALE.title.cameraoff).removeClass("current");
-                  // camradiovtndom.children("button").text("Off").removeClass("current");
-            camradiovtndom.prev("strong").text(LOCALE.title.cameraon);
-            // camradiovtndom.prev("strong").text("On");
-                  // unmute
-                  this.mediamute.audio = false;
-                  $("#miclist").removeAttr('disabled');
-              }
-              else{
-                camradiovtndom.children("button").text(LOCALE.title.cameraoff).addClass("current");
-                // camradiovtndom.children("button").text("Off").addClass("current");
-                camradiovtndom.prev("strong").text(LOCALE.title.cameraoff);
-                // camradiovtndom.prev("strong").text("Off");
-                // mute
-                this.mediamute.audio = true;
-                $("#miclist").attr('disabled', 'disabled');
-              }
-          }
-      },
-
-    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -521,6 +537,10 @@ h3 {
 .soundBg { background: url("../../assets/img/video/sound_off.svg") no-repeat center center rgba(2, 2, 2, 0.5); position: absolute; right: 0; bottom: 0; width: 43px; height: 30px; display: none; border-radius: 5px 0 5px 0;}
 .soundBg.on { display: block !important;}
 .cameraBg.off { display: block; border-radius: 5px;}
+input:focus , select:focus, select:active , a:focus{ outline: none;}
+button { cursor: pointer; background: none; border: none; outline: none;}
+button:disabled { opacity: 0.5;}
+button::-moz-focus-inner { border: 0;}
 /* cPop */
 .cPop { position: relative; width: 100%; height: 100%; text-align: center; display: table; color:black;  }
 .cPop h3 { font-weight: 600; margin-bottom: 10px;}

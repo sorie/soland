@@ -1208,7 +1208,7 @@
 	
 	module.exports = UcEngine;
 	
-	},{"../common/ucSocket":39,"./ChatEngine":42,"./ConferenceEngine":43,"./RegisterEngine":44,"./VideoCallEngine":46}],46:[function(require,module,exports){
+	},{"./VideoCallEngine":46}],46:[function(require,module,exports){
 
 	function VideoCallEngine(){
     var adapter = require('./webrtc-adapter');
