@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import List from '@/views/List.vue'
 import Example from '@/views/Example.vue'
+import VideoChat from '@/views/VideoChat.vue'
  
 Vue.use(Router)
 
@@ -18,9 +19,14 @@ export default new Router({
       component: List
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/Components',
+      name: 'Components',
       component: Example
+    },
+    {
+      path: '/VideoChat',
+      name: 'VideoChat',
+      component: VideoChat
     }
   ]
 })

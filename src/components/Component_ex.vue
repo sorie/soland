@@ -1,45 +1,44 @@
 <template>
-<div class="components">
-  <section class="cont__wrapper">
-    <h1>List of 16:9 proportion pictures with grid</h1>
-    <div class="live-item" v-if="clipdata.results">
-      <a class="img live-item__image" :href="clip.links.html" target="_blank" v-for="(clip, idx) in clipdata.results" :key="`${idx}`">
-        <img :src="clip.urls.small" class="image-cover" :alt="clip.alt_description">
-      </a>
-    </div>
-  </section>
-  <section class="cont__wrapper">
-    <h1>Swiper slide component</h1>
-    <swiper ref="mySwiper" class="main-visual-slide type2" v-if="bannerdata.results" :options="swiperOption">
-      <swiper-slide v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
-        <div class="bg bg-right" :style="`background-color: #${slide.color}`"></div>
-        <div class="bg bg-left" :style="`background-color: #${slide.color}`"></div>
-        <img :src="getBanner(slide.urls.regular)"  class="swiper-lazy" :alt="slide.alt_description">
-        <a :href="slide.links.html" target="_blank" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
-          <div class="slide_cont vod">    
-            <span class="title">{{slide.alt_description}}</span>                             
-          </div>   
+  <div class="container components">
+    <section class="cont__wrapper">
+      <h1>List of 16:9 proportion pictures with grid</h1>
+      <div class="live-item" v-if="clipdata.results">
+        <a class="img live-item__image" :href="clip.links.html" target="_blank" v-for="(clip, idx) in clipdata.results" :key="`${idx}`">
+          <img :src="clip.urls.small" class="image-cover" :alt="clip.alt_description">
         </a>
-        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-      </swiper-slide>
-    </swiper>
-    <div class="swiper-button-prev" slot="button-prev"></div>
-    <div class="swiper-button-next" slot="button-next"></div>
-    <div class="swiper-pagination" slot="pagination"></div>
-  </section>
-  <section class="cont__wrapper">
-    <h1>Web RTC</h1>
-    <lobby-room></lobby-room>
-  </section>
+      </div>
+    </section>
+    <section class="cont__wrapper">
+      <h1>Swiper slide component</h1>
+      <swiper ref="mySwiper" class="main-visual-slide type2" v-if="bannerdata.results" :options="swiperOption">
+        <swiper-slide v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
+          <div class="bg bg-right" :style="`background-color: #${slide.color}`"></div>
+          <div class="bg bg-left" :style="`background-color: #${slide.color}`"></div>
+          <img :src="getBanner(slide.urls.regular)"  class="swiper-lazy" :alt="slide.alt_description">
+          <a :href="slide.links.html" target="_blank" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
+            <div class="slide_cont vod">    
+              <span class="title">{{slide.alt_description}}</span>                             
+            </div>   
+          </a>
+          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+        </swiper-slide>
+      </swiper>
+      <div class="swiper-button-prev" slot="button-prev"></div>
+      <div class="swiper-button-next" slot="button-next"></div>
+      <div class="swiper-pagination" slot="pagination"></div>
+    </section>
+    <section class="cont__wrapper">
+      <h1>Web RTC</h1>
+      <lobby-room></lobby-room>
+    </section>
 
-</div>
+  </div>
 </template>
 <script>
 import Constant from '../Constant'
 import { mapState } from 'vuex'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import lobbyRoom from '@/components/video-call/lobbyRoom.vue'
-// import vueLazyLoad from "vue-lazyload";
 import 'swiper/css/swiper.css'
 
 export default {
@@ -57,32 +56,14 @@ export default {
       swiperOption: {
         loop: true,
         slidesPerView: 'auto',
-        // centeredSlides: true,
-        // effect: 'fade',
         spaceBetween: 30,
         lazy: true,
-        // autoHeight: true, //enable auto height
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
         pagination: {
           el: '.swiper-pagination'
-        },
-        // autoplay: {
-        //     delay: 10000,
-        //     disableOnInteraction: false
-        // },
-        on: {
-          init: function() {
-            // console.log('init');
-          },
-          slideChange() {
-            // console.log('onSlideChangeEnd===>', this);
-          },
-          tap() {
-            // console.log('onTap', this);
-          }
         }
       },
     }
@@ -98,21 +79,12 @@ export default {
     this.swiper.slideTo(3, 1000, false) 
     this.$store.dispatch(Constant.FETCH_EVENTSLIDE)
     this.$store.dispatch(Constant.FETCH_CLIP)
-
-    // Vue.use(vueLazyLoad, {
-    //     lazyComponent: true,
-    //     listenEvents: [ 'scroll' ]
-    // })
   },
   methods: {
     getBanner($d) {
       return `${$d}`
-    },
-    // clipImageUrl($s) {
-    //   let src="http://image.tving.com/crop.php?u=http://image.tving.com"
-    //   return src + $s
-    // }
-  }//methods end
+    }
+  }
   
 }
 </script>

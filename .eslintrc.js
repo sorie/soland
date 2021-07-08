@@ -20,7 +20,9 @@ module.exports = {
         "no-unused-vars": ["off"],
         "no-useless-escape": ["off"],
         "no-console":["off"],
-        "no-triple-curlies": ["off"]
+        "no-triple-curlies": ["off"],
+        "vue/html-indent": ["off"],  // enforce tabs in template
+        "indent": ["off"]    
     },
     globals:{
         "CONST": true,

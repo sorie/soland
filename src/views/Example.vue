@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Comp-ex/> 
-    <Footer/>
+    <Comp-ex /> 
+    <Footer />
   </div>
 </template>
 <script>

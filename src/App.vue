@@ -1,14 +1,25 @@
 <template>
-  <div id="app" class="main">
+  <div 
+    id="app" 
+    class="main"
+  >
     <div class="main__header" id="main__header">
       <router-link to="/List" class="logo">Sori Jeong</router-link>
       <ul class="menu">
         <router-link to="/List">List</router-link>
-        <router-link to="/about">Components</router-link>
+        <router-link to="/Components">Components</router-link>
+        <router-link to="/VideoChat">Video Chat</router-link>
       </ul>
-      <span class="main__header-hide" v-on:click="headHide"></span>
+      <span 
+        class="main__header-hide" 
+        @click="headHide"
+      >
+        숨기기
+      </span>
     </div>
-    <router-view/>
+    <div class="container">
+      <router-view />
+    </div>
   </div>
 </template>
 <script>
@@ -77,6 +88,7 @@ export default {
       border-top: 2px solid white;
       border-bottom: 2px solid white;
       cursor: pointer;
+      text-indent: -999em;
     }
     &.show {
       transform: translate(0);
@@ -84,7 +96,7 @@ export default {
     }
     &.hide {
       transform: translate(0,-90%);
-      transition: 1s transform ease-in;
+      transition: 500ms transform ease-in;
     }
     img {
       vertical-align: middle;
@@ -98,10 +110,10 @@ export default {
       max-width: 1200px;
       line-height: 70px;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       a {
         display: inline-block;
-        color: #9c0012;
+        color: #db3300;
         cursor: pointer;
         &:not(:last-child){
           margin-right: 10px;
