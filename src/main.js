@@ -4,10 +4,12 @@ import router from './router'
 import store from './store'
 import ES6Promise from 'es6-promise'
 import srEngine from '@/module/srEngine'
+import { config } from './config';
 
 ES6Promise.polyfill()
 Vue.config.productionTip = false
 Vue.use(srEngine);
+Vue.prototype.appConfig = config
 
 new Vue({
   router,

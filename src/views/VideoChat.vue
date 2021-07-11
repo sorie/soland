@@ -24,7 +24,6 @@
 	</section>
 </template>
 <script>
-import config from '../config'
 
 export default {
 	name: 'VideoChat',
@@ -89,6 +88,7 @@ export default {
 		else{
 				this.ismobiletype = false;
 				this.devicetype = 'pc';
+				this.appConfig.devicetype = 'pc';
 		}
 	},
 	methods: {
