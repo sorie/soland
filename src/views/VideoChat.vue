@@ -100,6 +100,14 @@ export default {
 				this.appConfig.devicetype = 'pc';
 		}
 	},
+	mounted() {
+		navigator.mediaDevices.addEventListener('devicechange', event => {
+			const newCameraList = this.getConnectedDevices('video');
+			const newAudioList = this.getConnectedDevices('audio');
+			this.updateList(newCameraList, 'video');
+			this.updateList(newAudioList, 'audio');
+		})
+	},
 	methods: {
 		async videoStart() {
 			try {
@@ -125,13 +133,6 @@ export default {
 		async getDevices(type) {
 			const devices = await this.getConnectedDevices(type);
 			await this.updateList(devices, type);
-
-			navigator.mediaDevices.addEventListener('devicechange', event => {
-				const newCameraList = this.getConnectedDevices('video');
-				const newAudioList = this.getConnectedDevices('audio');
-				this.updateList(newCameraList, 'video');
-				this.updateList(newAudioList, 'audio');
-			})
 		},
 		async getConnectedDevices(type) {
 			try {
