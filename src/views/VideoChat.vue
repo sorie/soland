@@ -4,22 +4,29 @@
 		<div class="cont">
 			<video 
 				id="getVideo" 
+				class="getVideo"
 				autoplay 
 				playsinline 
 				controls
 			/>
-			<button @click="videoStart">
-				start
-			</button>
-			<button @click="videoPause">
-				pause
-			</button>
+			<div class="btnWrap">
+				<button @click="videoStart">
+					start
+				</button>
+				<button @click="videoPause">
+					pause
+				</button>
+			</div>
 		</div>
 		<div class="cont">
-			<button @click="getDevices('videoinput')">get camera list</button>
-			<select name="" id="availableCameras"></select>
-			<button @click="getDevices('audioinput')">get audio list</button>
-			<select name="" id="availableAudios"></select>
+			<div class="selectWrap">
+				<select name="" id="availableCameras"></select>
+				<button @click="getDevices('videoinput')">get camera list</button>
+			</div>
+			<div class="selectWrap">
+				<select name="" id="availableAudios"></select>
+				<button @click="getDevices('audioinput')">get audio list</button>
+			</div>
 		</div>
 	</section>
 </template>
@@ -39,10 +46,12 @@ export default {
 
 		if(userAgent.match(/Mobile|Windows Phone|Lumia|Android|webOS|iPhone|iPod|Blackberry|PlayBook|BB10|Opera Mini|\bCrMo\/|Opera Mobi/i) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ){
 			if(userAgent.match(/iPhone|iPod|iPad/i) || navigator.platform === 'MacIntel'){
-					this.devicetype = 'iOS';
+				this.devicetype = 'iOS';
+				this.appConfig.devicetype = 'iOS';
 			}
 			else{
-					this.devicetype = 'Android';
+				this.devicetype = 'Android';
+				this.appConfig.devicetype = 'Android';
 			}
 
 			if(this.devicetype==='iphone'){
@@ -153,3 +162,29 @@ export default {
 	}
 }
 </script>
+<style lang="scss" scoped>
+video.getVideo {
+	width: 100%;
+}
+.cont {
+	margin-bottom: 3em;
+}
+button {
+	border: none;
+	background: rgba(255,255,255,.1);
+	padding: 1em 1.5em;
+	color: #fff;
+}
+.btnWrap>button {
+	margin-right: 1em;
+}
+.selectWrap {
+	&>select{
+		min-width: 7rem;
+		min-height: 2.8rem;
+	}
+	&>button{
+		margin-right: 1em;
+	}
+}
+</style>

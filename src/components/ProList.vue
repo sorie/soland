@@ -1,6 +1,10 @@
 /* 프로젝트 리스트 */
 <template>
-  <div class="projects" ref="projects" :style="[mainStyle]">
+  <div 
+    ref="projects" 
+    class="container projects" 
+    :style="[mainStyle]"
+  >
     <div class="mainTable">
       <div class="tableWrap">
         <table>
@@ -65,8 +69,6 @@ export default {
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  padding-top: 5em;
-  padding-bottom: 5em;
 }
 .mainTable {
   max-width: 1000px;

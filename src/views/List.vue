@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <proList/>
-    <Footer/>
+  <div>
+    <proList />
+    <Footer />
   </div>
 </template>
 

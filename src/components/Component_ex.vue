@@ -183,8 +183,6 @@ export default {
   position: relative;
   width: 100%;
   margin: auto;
-  margin-top: 100px;
-  margin-bottom: 100px;
 
   .live-item {
     width:100%;

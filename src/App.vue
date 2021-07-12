@@ -17,9 +17,7 @@
         숨기기
       </span>
     </div>
-    <div class="container">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 <script>
@@ -56,6 +54,8 @@ export default {
   position: relative;
   width:100%;
   height:100%;
+  padding-top: 8em;
+  padding-bottom: 8em;
 }
 .main {
   transition: 1s transform ease-in;
