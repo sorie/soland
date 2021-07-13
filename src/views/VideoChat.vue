@@ -31,6 +31,7 @@
 	</section>
 </template>
 <script>
+import adapter from 'webrtc-adapter';
 
 export default {
 	name: 'VideoChat',
@@ -38,10 +39,11 @@ export default {
 		return {
 			bSupportBrowser : true,
 			ismobiletype : true,
-			devicetype : ''
+			devicetype : '',
+			adapter: adapter,
 		}
 	},
-	beforeCreate() {
+	beforeMount() {
 		let userAgent = navigator.userAgent;
 
 		if(userAgent.match(/Mobile|Windows Phone|Lumia|Android|webOS|iPhone|iPod|Blackberry|PlayBook|BB10|Opera Mini|\bCrMo\/|Opera Mobi/i) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ){
@@ -95,9 +97,27 @@ export default {
 			}
 		}
 		else{
-				this.ismobiletype = false;
-				this.devicetype = 'pc';
-				this.appConfig.devicetype = 'pc';
+			this.ismobiletype = false;
+			this.devicetype = 'pc';
+			this.appConfig.devicetype = 'pc';
+
+			// browser check
+			this.appConfig.browsertype = this.adapter.browserDetails.browser;
+			if(this.appConfig.browsertype==='chrome'){
+					if(userAgent.indexOf("Opera") !== -1 || userAgent.indexOf("OPR") !== -1){
+							this.appConfig.browsertype = "opera";
+					}
+			}
+
+			if(window.navigator.userAgent.toLowerCase().indexOf("edg") > -1){
+					// wss websocket not supported
+					this.appConfig.browsertype = 'edg';
+					bSupportBrowser = false;
+			}
+		}	
+
+		if(!this.bSupportBrowser) {
+			alert('지원하지 않는 브라우저 입니다.')
 		}
 	},
 	mounted() {
