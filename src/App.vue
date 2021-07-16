@@ -8,7 +8,7 @@
       <ul class="menu">
         <router-link to="/List">List</router-link>
         <router-link to="/Components">Components</router-link>
-        <router-link to="/VideoChat">Video Chat</router-link>
+        <router-link to="/VideoChat">webRTC</router-link>
       </ul>
       <span 
         class="main__header-hide" 
