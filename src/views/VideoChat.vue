@@ -4,14 +4,14 @@
 		<div class="cont">
 			<h2>1. get video</h2>
 			<video 
-				id="getVideo" 
+				id="localVideo" 
 				class="getVideo"
 				autoplay 
 				playsinline 
 				controls
 			/>
 			<video 
-				id="getVideoTwo" 
+				id="remoteVideo" 
 				class="getVideo"
 				autoplay 
 				playsinline 
@@ -61,6 +61,10 @@ export default {
 			localStream: null,
 			pc1: null,
 			pc2: null,
+			offerOptions: {
+				offerToReceiveAudio: 1,
+				offerToReceiveVideo: 1
+			},
 		}
 	},
 	beforeMount() {
@@ -160,7 +164,7 @@ export default {
 					'audio': true
 				}
 				const stream = await navigator.mediaDevices.getUserMedia(constraints);
-				const videoElement = document.getElementById('getVideo');
+				const videoElement = document.getElementById('localVideo');
 				videoElement.srcObject = stream;
 				this.localStream = stream;
 				let videoTracks = await stream.getVideoTracks();
@@ -175,7 +179,7 @@ export default {
 			}
 		},
 		videoPause() {
-			const videoElement = document.getElementById('getVideo');
+			const videoElement = document.getElementById('localVideo');
 			if(videoElement.paused) videoElement.play();
 			else videoElement.pause()
 		},
@@ -209,10 +213,11 @@ export default {
 				listElement.add(deviceOption)
     	});
 		},
-		connectPeer() {
+		async connectPeer() {
 			let startTime = window.performance.now();
 			const videoTracks = this.localStream.getVideoTracks();
 			const audioTracks = this.localStream.getAudioTracks();
+			document.getElementById('btn_hangUp').disabled = false;
 			if(videoTracks.length > 0) {
 				console.info(`Using video device: ${videoTracks[0].label}`)
 			}
@@ -221,32 +226,123 @@ export default {
 			}
 			const configuration = {};
 			this.pc1 = new RTCPeerConnection(configuration);
-			this.pc1.addEventListener('icecandidate', e => this.onIceCadidate(pc1, e));
+			this.pc1.addEventListener('icecandidate', e => this.onIceCandidate(this.pc1, e));
+			this.pc2 = new RTCPeerConnection(configuration);
+			this.pc2.addEventListener('icecandidate', e => this.onIceCandidate(this.pc2, e));
 
+			this.pc1.addEventListener('iceconnectionstatechange', e => this.onIceStateChange(this.pc1, e));
+			this.pc2.addEventListener('iceconnectionstatechange', e => this.onIceStateChange(this.pc2, e));
+			this.pc2.addEventListener('track', e => this.gotRemoteStream(e));
+
+			this.localStream.getTracks().forEach(track => this.pc1.addTrack(track, this.localStream));
+			console.info('Added local stream to pc1');
+
+			try{
+				console.info('pc1 createOffer start');
+				const offer = await this.pc1.createOffer(this.offerOptions);
+				await this.onCreateOfferSuccess(offer);
+			}catch(e){
+				this.onCreateSessionDescriptionError(e);
+			}
+
+		},
+		async onCreateOfferSuccess(desc) {
+			console.info(`offer from pc1\n ${desc.sdp}`);
+			console.info('pc1 setLocalDescription start');
+			try{
+				await this.pc1.setLocalDescription(desc);
+				this.onSetLocalSuccess(this.pc1);
+			}catch(e){
+				this.onSetSessionDescriptionError();
+			}
+
+			console.info('pc2 setRemoteDesciption start');
+			try{
+				await this.pc2.setRemoteDescription(desc);
+				this.onSetRemoteSuccess(this.pc2);
+			}catch(e){
+				this.onSetSessionDescriptionError();
+			}
+
+			console.info('pc2 createAnswer start');
+			try{
+				const answer = await this.pc2.createAnswer();
+				await this.onCreateAnswerSuccess(answer);
+			}catch(e){
+				this.onCreateSessionDescriptionError();
+			}
+		},
+		onSetLocalSuccess(pc) {
+			console.info(`${this.getName(pc)} setLocalDescription complete`)
+		},
+		onSetRemoteSuccess(pc) {
+			console.info(`${this.getName(pc)} setRemoteDescription complete`)
+		},
+		onSetSessionDescriptionError(error) {
+			console.info(`Fail to set session description: ${error.toString()}`)
+		},
+		async onCreateAnswerSuccess(desc) {
+			console.info(`Answer from pc2:\n ${desc.sdp}`);
+			console.info('pc2 setLocalDescription start');
+			try{
+				await this.pc2.setLocalDescription(desc);
+				this.onSetLocalSuccess(pc2);
+			}catch(e){
+				this.onSetSessionDescriptionError(e);
+			}
+
+			console.info('pc1 setRemoteDescription start');
+			try{
+				await this.pc1.setRemoteDescription(desc);
+				this.onSetRemoteSuccess(this.pc1);
+			}catch(e){
+				this.onSetSessionDescriptionError(e);
+			}
+		},
+		onCreateSessionDescriptionError(error) {
+			console.info(`Failed to create session description: ${error.toString()}`);
 		},
 		hangUp() {
 			console.log('Ending call');
-			pc1.close();
-			pc2.close();
-			pc1 = null;
-			pc2 = null;
-			hangupButton.disabled = true;
-			callButton.disabled = false;
+			this.pc1.close();
+			this.pc2.close();
+			this.pc1 = null;
+			this.pc2 = null;
+			document.getElementById('btn_hangUp').disabled = true;
+			document.getElementById('btn_connect').disabled = false;
+		},
+		gotRemoteStream(e) {
+			if(document.getElementById('remoteVideo').srcObject != e.streams[0]) {
+				document.getElementById('remoteVideo').srcObject = e.streams[0];
+				console.info('pc2 received remote stream');
+			}
+		},
+		onIceStateChange(pc, event) {
+			if(pc) {
+				console.log(`${this.getName(pc)} ICE state : ${pc.iceConnectionState}`);
+				console.log('ICE state change event : ', event);
+			}
 		},
 		async onIceCandidate(pc, event) {
 			try {
 				await (this.getOtherPc(pc).addIceCandidate(event.candidate));
-				onAddIceCandidateSuccess(pc);
+				this.onAddIceCandidateSuccess(pc);
 			} catch (e) {
-				onAddIceCandidateError(pc, e);
+				this.onAddIceCandidateError(pc, e);
 			}
 			console.log(`${this.getName(pc)} ICE candidate:\n${event.candidate ? event.candidate.candidate : '(null)'}`);
 		},
+		onAddIceCandidateSuccess(pc){
+			console.info(`${this.getName(pc)} addIceCandidate success`)
+		},
+		onAddIceCandidateError(pc,error){
+			console.info(`${this.getName(pc)} failed to add ICE candidate: ${error.toString()}`)
+		},
 		getName(pc) {
-			return (pc === pc1) ? 'pc1' : 'pc2';
+			return (pc === this.pc1) ? 'pc1' : 'pc2';
 		},
 		getOtherPc(pc) {
-			return (pc === pc1) ? pc2 : pc1;
+			return (pc === this.pc1) ? this.pc2 : this.pc1;
 		}
 	}
 }
@@ -264,7 +360,7 @@ video.getVideo {
   margin: 0 0 20px 0;
   vertical-align: top;
 }
-video#getVideo {
+video#localVideo {
   margin: 0 20px 20px 0;
 }
 .cont {
