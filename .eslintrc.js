@@ -22,7 +22,8 @@ module.exports = {
         "no-console":["off"],
         "no-triple-curlies": ["off"],
         "vue/html-indent": ["off"],  // enforce tabs in template
-        "indent": ["off"]    
+        "indent": ["off"]    ,
+        "vue/singleline-html-element-content-newline": ["off"]
     },
     globals:{
         "CONST": true,
