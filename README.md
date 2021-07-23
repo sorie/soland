@@ -1,22 +1,32 @@
-# soland by sori jeong
-### 개인 프로젝트 
-#### 프론트 프레임워크 : vue.js, nuxt.js
-#### 언어 : javascript, es6, es5, html, css
+##### soland by sori jeong
+### 코딩 기록 
 
-## Project setup
+##### 사용언어 
+- javascript, es6, html, css
+- vue.js, nuxt.js
+- 이미지 api 제공 : unsplash
+
+##### Examples
+1. 그동안 작업한 Project list
+2. 이미지 api를 사용한 html, css(flex, grid사용) 구현
+3. webRTC 구현
+- mediaDevices interface 사용
+- RTCPeerConnection 연결
+
+#### Project setup
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+#### Compiles and hot-reloads for development
 ```
 yarn run serve
 ```
 
-### 테스트 url
+#### 테스트 url
 ```
 http://localhost:8080/
 ```
 
-### Customize configuration
+#### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
