@@ -20,7 +20,7 @@ yarn install
 
 #### Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn serve
 ```
 
 #### 테스트 url
