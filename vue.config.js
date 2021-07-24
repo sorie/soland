@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/List',
+  publicPath: '/soland',
   outputDir: './docs',
   
   devServer: {
