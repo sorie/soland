@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/pages',
+  publicPath: '/List',
   outputDir: './docs',
   
   devServer: {
