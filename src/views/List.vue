@@ -1,19 +1,16 @@
 <template>
-  <div>
+  <section>
     <proList />
-    <Footer />
-  </div>
+  </section>
 </template>
 
 <script>
-import ProList from '@/components/ProList.vue'
-import Footer from '@/components/Footer.vue'
+import ProList from '@/components/ProList'
 
 export default {
   name: 'List',
   components: {
-    ProList,
-    Footer
+    ProList
   },
 }
 </script>

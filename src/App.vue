@@ -3,7 +3,7 @@
     id="app" 
     class="main"
   >
-    <div class="main__header" id="main__header">
+    <header class="main__header" id="main__header">
       <router-link to="/List" class="logo">Sori Jeong</router-link>
       <ul class="menu">
         <router-link to="/List">List</router-link>
@@ -17,13 +17,18 @@
       >
         숨기기
       </span>
-    </div>
+    </header>
     <router-view />
+    <Footer />
   </div>
 </template>
 <script>
+import Footer from '@/components/Footer'
 export default {
   name: 'App',
+  components: {
+    Footer
+  },
   data() {
     return {
       flog: false
