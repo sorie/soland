@@ -77,8 +77,8 @@ export default {
   mounted : function() {   
     console.log('Current Swiper instance object', this.swiper)
     this.swiper.slideTo(3, 1000, false) 
-    this.$store.dispatch(Constant.FETCH_EVENTSLIDE)
-    this.$store.dispatch(Constant.FETCH_CLIP)
+    this.$store.dispatch(Constant.FETCH_IMAGE_SLIDE)
+    this.$store.dispatch(Constant.FETCH_IMG_GRID)
   },
   methods: {
     getBanner($d) {

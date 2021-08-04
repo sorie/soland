@@ -1,10 +1,10 @@
 import Constant from "../Constant"
 
 export default {
-  [Constant.FETCH_EVENTSLIDE] : (state,payload) => {
+  [Constant.FETCH_IMAGE_SLIDE] : (state,payload) => {
     state.bannerdata = payload.bannerdata
   },
-  [Constant.FETCH_CLIP] : (state,payload) => {
+  [Constant.FETCH_IMG_GRID] : (state,payload) => {
     state.clipdata = payload.clipdata
   }
 }

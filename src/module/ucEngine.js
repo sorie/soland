@@ -1396,7 +1396,7 @@
 	
 		//처음 회의 미디어화면 시작 - for 로비
 		this.getLocalMedia = function(param, getLocalStream, getLocalStreamFail){
-			if(navigator.mediaDevices.getUserMedia){
+			if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
 				let constraints = {};
 				let videoconstraints = {};
 				let audioconstraints = {};
