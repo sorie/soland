@@ -3,7 +3,6 @@ module.exports = {
   outputDir: './docs',
   
   devServer: {
-    port: 5000,
-    host: 'localhost',
+    port: 5000
   }
 }
