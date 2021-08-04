@@ -68,8 +68,10 @@ export default {
   &__header {
     position: fixed;
     top: 0;
-    right: 2rem;
-    padding: 10px;
+    max-width: 37.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1em;
     background-color: rgba(255,255,255,0.5);
     text-align: center;
     z-index: 2;
@@ -77,17 +79,17 @@ export default {
     animation-duration: 1s;
     @keyframes down {
       from {
-        transform: translate(0,-90%);
+        transform: translate(-50%, -90%);
       }
       to {
-        transform: translate(0,0);
+        transform: translate(-50%, 0%);
       }
     }
     &-hide {
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translate(-50%);
+      transform: translate(-50%, 0%);
       width: 2em;
       height: 0.3em;
       margin-bottom: 0.2em;
@@ -97,11 +99,11 @@ export default {
       text-indent: -999em;
     }
     &.show {
-      transform: translate(0);
+      transform: translate(-50%, 0%);
       transition: 1s transform ease-in;
     }
     &.hide {
-      transform: translate(0,-90%);
+      transform: translate(-50%,-85%);
       transition: 500ms transform ease-in;
     }
     img {
@@ -113,8 +115,7 @@ export default {
       font-weight: bolder;
     }
     .menu {
-      max-width: 1200px;
-      line-height: 70px;
+      line-height: 2.5;
       font-weight: 800;
       font-size: 1.3rem;
       a {

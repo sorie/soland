@@ -149,12 +149,14 @@ export default {
 		const btn_hangup = document.getElementById('btn_hangUp');
 		btn_connect.disabled = true;
 		btn_hangup.disabled = true;
-		navigator.mediaDevices.addEventListener('devicechange', event => {
-			const newCameraList = this.getConnectedDevices('video');
-			const newAudioList = this.getConnectedDevices('audio');
-			this.updateList(newCameraList, 'video');
-			this.updateList(newAudioList, 'audio');
-		})
+		if(navigator.mediaDevices){
+			navigator.mediaDevices.addEventListener('devicechange', event => {
+				const newCameraList = this.getConnectedDevices('video');
+				const newAudioList = this.getConnectedDevices('audio');
+				this.updateList(newCameraList, 'video');
+				this.updateList(newAudioList, 'audio');
+			})
+		}
 	},
 	methods: {
 		async videoStart() {
@@ -357,11 +359,11 @@ video.getVideo {
   --width: 45%;
   width: var(--width);
   height: calc(var(--width) * 0.75);
-  margin: 0 0 20px 0;
+  margin: 0 0 1.2em 0;
   vertical-align: top;
 }
 video#localVideo {
-  margin: 0 20px 20px 0;
+  margin: 0 1.2em 1.2em 0;
 }
 .cont {
 	margin-bottom: 3em;
@@ -370,6 +372,7 @@ button {
 	border: none;
 	background: rgba(255,255,255,.2);
 	padding: 1em 1.5em;
+	font-size: 0.85rem;
 	color: #fff;
 	cursor: pointer;
 }
