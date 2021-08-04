@@ -4,7 +4,7 @@
     class="main"
   >
     <header class="main__header" id="main__header">
-      <router-link to="/List" class="logo">Sori Jeong</router-link>
+      <router-link to="/List" class="logo">SoRi</router-link>
       <ul class="menu">
         <router-link to="/List">List</router-link>
         <router-link to="/Components">Components</router-link>
@@ -131,6 +131,14 @@ export default {
       content: '';
       display: table;
       clear: both;
+    }
+  }
+}
+
+@media (max-width: 40rem) {
+  .main {
+    &__header {
+      min-width: 80%;
     }
   }
 }
