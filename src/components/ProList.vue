@@ -22,7 +22,7 @@
                 <td>{{item.workspace}}</td>
                 <td>{{item.language}}</td>
                 <td v-html=item.role></td>
-                <td>{{item.type}}</td>
+                <td class="center">{{item.type}}</td>
               </tr>
             </tbody>
           </table>
@@ -131,5 +131,8 @@ body {
       }
     }
   }
+}
+.center {
+  text-align: center;
 }
 </style>

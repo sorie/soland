@@ -1,6 +1,6 @@
 {
   "titlename" : [
-    "이름","기간","소속회사","주사용기술","역할","유형"
+    "이름","기간","소속회사","주사용기술","역할","고용형태"
   ],
   "titlename2" : ["모바일","접근성","반응형","Script"],
   "items" : [
@@ -8,39 +8,39 @@
       "name" : "말톡노트 Web RTC 화상채팅 서비스 제작 운영개발",
       "date" : "2020-02-01 ~ \\n 진행중",
       "workspace" : "(주)다이얼커뮤니케이션즈",
-      "language":"Javascript, JQeury, Web RTC API, Node.js, Html, Scss, CSS, CSS5, Mysql",
+      "language":"Javascript, JQeury, WebRTC API, Node.js, html, Scss, CSS, Mysql",
       "role":"Web RTC를 이용한 화상채팅 서비스(PC, Mobile 제공) 개선사항 개발 및 운영중 \\n-화상채팅에 필요한 설정(잠금,마이크,카메라설정 등)\\n-알림서비스(노크,입장,장애 등)\\n-채팅서비스, 공유서비스(화면공유,유튜브공유,문서공유,화이트보드공유)\\n말톡노트 화상채팅 메인 홈페이지 제작후 운영중\\n- 개인서비스 (가입,로그인,로그아웃, 개인 화상채팅방 만들기)\\n-화상채팅 내역 및 녹화파일 제공\\n말톡노트 관리자 페이지 제작 후 운영중\\n-관리자 설정 (아이디 생성, 유저별 방생성, URL제공 등)\\n-화상채팅내역 확인\\n-교재관리(교재등록)", 
-      "type" : "사내프로젝트"
+      "type" : "정규직"
     },
     {
       "name" : "여행의 발자취 페이지 제작",
       "date" : "2019-10-15 ~ \\n 2020-02-01",
       "workspace" : "(주)다이얼커뮤니케이션즈",
-      "language":"Open API, Javascript, JQuery, Html5, CSS, CSS2",
+      "language":"Open API, Javascript, JQuery, html, CSS",
       "role":"말톡어플을 통해 사람들이 남길 수 있는 여행일정 등록 서비스 제작\\n여행일정 등록 페이지 제작 시 필요한 여행의 정보 오픈 API를 통해 적용 (날씨, 환율, 물가, 여행지 공항정보 등)", 
-      "type" : "사내프로젝트"
+      "type" : "정규직"
     },
     {
       "name" : "스피드메이트 CTI 제작",
       "date" : "2019-09-15 ~ \\n2019-10-15",
       "workspace" : "(주)다이얼커뮤니케이션즈",
-      "language":"PHP, Node.js, Javascript, JQuery, Html5, CSS, CSS2",
+      "language":"PHP, Node.js, Javascript, JQuery, html, CSS",
       "role":"스피드메이트라는 자동차 정비 업체안에서 사용되는 채팅과 전화의 통합 페이지의 전반적인 프론트엔드 업무\\n- 스마트서비스도구 (문자,통화,상대방의상태 확인 등 퀵 오퍼레이션 도구 모음)\\n-실시간콜모니터링\\n-이력관리, 생산성통계페이지,자동응답관리\\n-이용현황관리, 관리자설정\\n-개별도구(로그아웃,비밀번호변경)", 
-      "type" : "외주"
+      "type" : "정규직"
     },
     {
       "name" : "미미박스 사내 운영 서비스 CTI 제작",
       "date" : "2019-07-15 ~ \\n2019-09-15",
       "workspace" : "(주)다이얼커뮤니케이션즈",
-      "language":"PHP, Node.js, Javascript, JQuery, Html5, CSS, CSS2", 
+      "language":"PHP, Node.js, Javascript, JQuery, html, CSS", 
       "role":"미미박스라는 화장품 판매 업체안에서 사용되는 채팅과 전화의 통합 페이지의 전반적인 프론트엔드 업무\\n- 스마트서비스도구 (문자,통화,상대방의상태 확인 등 퀵 오퍼레이션 도구 모음)\\n-실시간콜모니터링\\n-이력관리, 생산성통계페이지,자동응답관리\\n-이용현황관리, 관리자설정\\n-개별도구(로그아웃,비밀번호변경)", 
-      "type" : "외주"
+      "type" : "정규직"
     },
     {
       "name" : "CJ E&M 티빙 운영개발",
       "date" : "2018-10-22 ~ \\n2019-06-30",
       "workspace" : "디와이즈",
-      "language":"Javascript, Jquery, Vue.js, HTML5, CSS, CSS2",
+      "language":"Javascript, Jquery, Vue.js, html, CSS",
       "role":"티빙이라는 방송 콘텐츠서비스 운영으로 티빙서비스에서 생기는 이벤트 및 수정사항 마크업 및 이벤트 동작처리.", 
       "type" : "프리랜서"
     },
@@ -48,17 +48,17 @@
       "name" : "게임 커뮤니티 사이트 제작",
       "date" : "2017-09-01 ~ \\n2017-10-01",
       "workspace" : "(주)아이지에스",
-      "language":"Html5, css, css2, JQuery, Javascript",
+      "language":"html, css, css2, JQuery, Javascript",
       "role":"게임커뮤니티 페이지 제작\\n- 메인 홈, 게임페이지, 게임뷰, 마이페이지 등 전체 페이지 반응형 웹 제작", 
-      "type" : "사내프로젝트"
+      "type" : "정규직"
     },
     {
       "name" : "게임 이벤트 페이지 제작",
       "date" : "2017-07-27 ~ \\n2018-02-02",
       "workspace" : "(주)아이지에스",
-      "language":"Html5, css, css2, JQuery, Javascript",
+      "language":"html, css, css2, JQuery, Javascript",
       "role":"넷마블 게임에서 발생되는 이벤트 페이지 제작", 
-      "type" : "사내프로젝트"
+      "type" : "정규직"
     },
     {
       "name" : "해피머니 관리자페이지 제작",
@@ -66,7 +66,7 @@
       "workspace" : "(주)핑거",
       "language":"Java, Spring, Mysql, Mybatis",
       "role":"해피머니 상품권을 구매할 수 있는 메인 홈페이지의 관리자 페이지 속 게시판 제작", 
-      "type" : "외주"
+      "type" : "정규직"
     },
     {
       "name" : "오케스트라 플러그인 예제 페이지 제작",
@@ -74,55 +74,55 @@
       "workspace" : "(주)핑거",
       "language":"Java, Spring, Mysql, Mybatis",
       "role":"사내 직원이 보안이 있는 프로젝트 어디서든 개발툴(이클립스)에서 사용할 수 있는 개발 플러그인을 안내하는 예제 페이지를 제작", 
-      "type" : "사내프로젝트"
+      "type" : "정규직"
     },
     {
       "name" : "사내 직원 관리 어플 제작 ",
       "date" : "2016-11-01 ~ \\n2017-04-01",
       "workspace" : "(주)핑거",
-      "language":"Javascript, JQuery, Html5, CSS",
+      "language":"Javascript, JQuery, html, CSS",
       "role":"출퇴근 기록, 직원정보조회, 열매주기/받기 등의 직원 관리 어플 (포레스트)", 
-      "type" : "사내프로젝트"
+      "type" : "정규직"
     },
     {
       "name" : "회사 홈페이지 제작",
       "date" : "2016-06-01 ~ \\n2016-09-01",
       "workspace" : "(주)다이얼커뮤니케이션즈",
-      "language":"Html5, CSS, JQuery",
-      "role":"해피머니 상품권을 구매할 수 있는 메인 홈페이지의 관리자 페이지 속 게시판 제작", 
-      "type" : "외주"
+      "language":"html, CSS, JQuery",
+      "role":"해피머니 상품권을 구매할 수 있는 메인 홈페이지의 관리자 페이지 속 게시판 제작\\n www.dial070.co.kr", 
+      "type" : "정규직"
     },
     {
       "name" : "상품판매 페이지 제작",
       "date" : "2016-02-01 ~ \\n2017-04-01",
       "workspace" : "(주)다이얼커뮤니케이션즈",
-      "language":"Javascript, JQuery, Html5, CSS, php",
+      "language":"Javascript, JQuery, html, CSS, php",
       "role":"기존 해외 통화 어플 페이지 내 유심, 포켓와이파이 판매 페이지 추가 제작. 상품 주문 페이지, 주문 시 메일 전송 처리", 
-      "type" : "외주"
+      "type" : "정규직"
     },
     {
-      "name" : "관리자페이지 제작",
+      "name" : "관리자 페이지 제작",
       "date" : "2016-02-01 ~ \\n2016-06-01",
       "workspace" : "(주)다이얼커뮤니케이션즈",
       "language":"extJS, php, Ajax",
       "role":"sencha architect를 이용하여 관리자 페이지 제작, 사용자 현황 페이지, 사용자 정보 페이지 제작", 
-      "type" : "외주"
+      "type" : "정규직"
     },
     {
       "name" : "해외 통화 어플 웹뷰 제작",
       "date" : "2015-08-01 ~ \\n2016-11-01",
       "workspace" : "(주)다이얼커뮤니케이션즈",
-      "language":"Javascript, JQuery, Html5, CSS",
+      "language":"Javascript, JQuery, html, CSS",
       "role":"가입 페이지, 상품설명 페이지 제작을 위해 프로토타입 설계 및 제작", 
-      "type" : "외주"
+      "type" : "정규직"
     },
     {
       "name" : "해외통화어플 홈페이지 제작",
       "date" : "2015-02-16 ~ \\n2016-06-01",
       "workspace" : "(주)다이얼커뮤니케이션즈",
-      "language":"Javascript, JQuery, Html5, CSS, photoshop, illustration",
-      "role":"해외통화 어플 소개 페이지, 어플 각 기능 설명 페이지, 기존 문자전송 서비스 페이지 이전 제작 등 전체페이지 리뉴얼", 
-      "type" : "외주"
+      "language":"Javascript, JQuery, html, CSS, photoshop, illustration",
+      "role":"해외통화 어플 소개 페이지, 어플 각 기능 설명 페이지, 기존 문자전송 서비스 페이지 이전 제작 등 전체페이지 리뉴얼\\n www.maaltalk.com", 
+      "type" : "정규직"
     }
   ]
 }
