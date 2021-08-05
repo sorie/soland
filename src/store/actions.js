@@ -33,6 +33,7 @@ export default {
     .catch(() => {
       console.log("something went wrong!");
     });
+
   }
 
 }

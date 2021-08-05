@@ -12,12 +12,12 @@
       <h1>Swiper slide component</h1>
       <swiper ref="mySwiper" class="main-visual-slide type2" v-if="bannerdata.results" :options="swiperOption">
         <swiper-slide v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
-          <div class="bg bg-right" :style="`background-color: #${slide.color}`"></div>
-          <div class="bg bg-left" :style="`background-color: #${slide.color}`"></div>
-          <img :src="getBanner(slide.urls.regular)"  class="swiper-lazy" :alt="slide.alt_description">
+          <div class="bg bg-right" :style="`background-color: ${slide.color}`">right</div>
+          <div class="bg bg-left" :style="`background-color: ${slide.color}`">left</div>
           <a :href="slide.links.html" target="_blank" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
             <div class="slide_cont vod">    
-              <span class="title">{{slide.alt_description}}</span>                             
+              <img :src="getBanner(slide.urls.regular)"  class="swiper-lazy" :alt="slide.alt_description">
+              <span class="sub" :style="`color:${slide.color}`">{{slide.description}}</span>                             
             </div>   
           </a>
           <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
@@ -91,12 +91,14 @@ export default {
 <style lang="scss" scoped>
 .swiper-container{
   height: 500px;
+  font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
   .bg {
     position: absolute;
     top: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: rgb(0, 0, 0);
     z-index:-1;
+    text-indent: -9999rem;
     &-right {
       right: 0;
       left: 50%;
@@ -110,66 +112,55 @@ export default {
     height: 380px;
     .swiper-slide {
       &:empty {
-        background-color: rgb(37, 31, 31);
-      }
-      img{
-        width: 100%;
-        object-fit: cover;
-        z-index: 1;
+        background-color: rgb(0, 0, 0);
       }
     }
-    &.type2 {
-      .slide_cont {
+    .slide_cont {
+      width: 100%;
+      height: 100%;
+      img{
         position: absolute;
+        width: auto;
         left: 50%;
         bottom: 50%;
-        width: auto;
         margin: 0px 0px 0px -540px;
         -webkit-transform: translateY(50%);
         -moz-transform: translateY(50%);
         transform: translateY(50%);
         transition: transform 1s ease-in;
         text-align: left;
-        color: #fff;
-        .title {
-          display: block;
-          margin-bottom: 0px;
-          line-height: 54px;
-          font-size: 48px;
-          font-weight: 400;
-          opacity: 1;
-        }
-        .sub {
-          display: block;
-          line-height: 24px;
-          margin: 0px;
-          padding-top: 18px;
-          font-size: 20px;
-          font-weight: 400;
-          opacity: 0.7;
-        }
-        .sub2 {
-          display: block;
-          font-size: 17px;
-          line-height: 18px;
-          color: #fff;
-          padding-top: 20px;
-          letter-spacing: .5px;
-        }
-        &.vod {
-          .title {
-            font-size: 16px;
-            line-height: 20px;
-          }
-          .sub {
-            font-size: 36px;
-            line-height: 40px;
-            opacity: 1;
-          }
-          
-        }
-
+        color: rgb(0, 0, 0);
       }
+      .title {
+        display: block;
+        margin-bottom: 0px;
+        line-height: 1;
+        font-size: 2rem;
+        font-weight: 400;
+        opacity: 1;
+      }
+      .sub {
+        position: absolute;
+        bottom: 1em;
+        left: 50%;
+        transform: translate(-50%);
+        line-height: 1.5;
+        margin: 0px;
+        padding-top: 1.1em;
+        font-size: 1.5rem;
+        font-weight: 800;
+        opacity: 0.9;
+        filter: invert(100%);
+      }
+      .sub2 {
+        display: block;
+        font-size: 17px;
+        line-height: 18px;
+        color: #fff;
+        padding-top: 20px;
+        letter-spacing: .5px;
+      }
+
     }
   }
   .logger_click {

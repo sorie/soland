@@ -544,9 +544,9 @@ button::-moz-focus-inner { border: 0;}
 /* cPop */
 .cPop { position: relative; width: 100%; height: 100%; text-align: center; display: table; color:black;  }
 .cPop h3 { font-weight: 600; margin-bottom: 10px;}
-.cPop .con { position: relative; width: 385px; display: inline-block; background: #fff; border-radius: 10px; padding: 15px; text-align: left;}
+.cPop .con { position: relative; width: 80%; max-width:25rem; display: inline-block; background: #fff; border-radius: 10px; padding: 15px; text-align: left;}
 .cPop dl { position: relative; clear: both;}
-.cPop dl dt.popVideo { position: relative; clear: both; border-radius: 10px; width: 385px; height: 220px; background: #000; padding-top: 0;overflow: hidden;}
+.cPop dl dt.popVideo { position: relative; clear: both; border-radius: 10px; width: 100%; height: 220px; background: #000; padding-top: 0;overflow: hidden;}
 .cPop dl dt.popVideo video { border-radius: 10px; object-fit: cover;}
 .cPop h3 span { display: block; font-size: 16px; color: #888; line-height: 22px;}
 .cPop dl dt { font-size: 1rem; font-weight: 600; line-height: 18px; color: #333; padding-top: 10px; text-align: left;}
