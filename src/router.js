@@ -32,11 +32,6 @@ export default new Router({
       path: '/VideoChat',
       name: 'VideoChat',
       component: VideoChat
-    },
-    {
-      path: '/Canvas',
-      name: 'Canvas',
-      component: Canvas
     }
   ]
 })

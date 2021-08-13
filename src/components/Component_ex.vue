@@ -27,10 +27,6 @@
       <div class="swiper-button-next" slot="button-next"></div>
       <div class="swiper-pagination" slot="pagination"></div>
     </section>
-    <section class="cont__wrapper">
-      <h1>Web RTC</h1>
-      <lobby-room></lobby-room>
-    </section>
 
   </div>
 </template>
@@ -38,15 +34,13 @@
 import Constant from '../Constant'
 import { mapState } from 'vuex'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-import lobbyRoom from '@/components/video-call/lobbyRoom.vue'
 import 'swiper/css/swiper.css'
 
 export default {
   name: 'component_ex',
   components: {
     Swiper,
-    SwiperSlide,
-    lobbyRoom
+    SwiperSlide
   },
   directives: {
     swiper: directive
@@ -150,6 +144,7 @@ export default {
         font-size: 1.5rem;
         font-weight: 800;
         opacity: 0.9;
+        -webkit-filter: invert(100%);
         filter: invert(100%);
       }
       .sub2 {

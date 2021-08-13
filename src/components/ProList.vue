@@ -1,4 +1,3 @@
-/* 프로젝트 리스트 */
 <template>
   <div 
     ref="projects" 
@@ -66,7 +65,6 @@ export default {
   },
 }
 </script>
-// scoped 속성을 가지고있을 때, CSS는 현재 컴포넌트의 엘리먼트에만 적용
 <style lang="scss" scoped>
 body {
   overflow-x: hidden;

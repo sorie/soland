@@ -1,6 +1,7 @@
 <template>
 	<section class="container canvas">
 		<h1>canvas basic</h1>
+		<p>Comming soon.</p>
 	</section>
 </template>
 <script>
