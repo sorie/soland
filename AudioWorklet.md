@@ -1,6 +1,6 @@
 
 
-## ScriptProcessorNode deplication 경고
+## ScriptProcessorNode deprecated 경고
 배경 : Javascript에서 사용자 정의 오디오 처리를 활성화하기 위해 Web Audio API는 이벤트 핸들러를 사용하여 기본 UI스레드에서 사용자 스크립트를 호출하는 ScriptProcessorNode가 나왔는데
 두가지 문제가 있다.
 1. 이벤트 처리는 기본적으로 비동기식이어서 대기 시간을 유도한다
