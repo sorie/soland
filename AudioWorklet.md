@@ -36,8 +36,10 @@ HTTPS를 통해 제공되어야 하지만 http://localhost 로컬 테스트에�
 - MessagePort는 .port노드와 프로세서 모두의 속성을 통해 액세스할 수 있다. 
 - 노드의 port.postMessage() 방법은 관련 프로세서의 port.onmessage 핸들러에 메시지를 양방향으로 보낼 수 있다.
 - MessagePort는 Transferable을 지원하므로 스레드 경계를 통해 데이터 저장소 또는 WASM모듈을 전송할 수 있다. 
-<br>
+<br/>
+
 ![image](https://user-images.githubusercontent.com/12015609/167545354-d5b648cf-872a-484c-a597-9729508cdb93.png)
+
 - 이모든 기능을 합친것이 GainNode이다. 
 
 ##### 현재 Audio Worklet은 Chrome 66 이상에서 기본적으로 활성화되어 있다. Chrome 64 및 65에서 이 기능은 안정화 되지 않았다.
