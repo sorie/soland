@@ -3,7 +3,7 @@
 ## ScriptProcessorNode deprecated 경고
 배경 : Javascript에서 사용자 정의 오디오 처리를 활성화하기 위해 Web Audio API는 이벤트 핸들러를 사용하여 기본 UI스레드에서 사용자 스크립트를 호출하는 ScriptProcessorNode가 나왔는데
 두가지 문제가 있다.
-1. 이벤트 처리는 기본적으로 비동기식이어서 대기 시간을 유도한다
+1. 이벤트 처리는 기본적으로 동기식이어서 대기 시간을 유도한다
 2. 코드 실행은 기본 스레드에서 발생하여 다양한 UI 및 DOM 관련 작업으로 일반적으로 혼잡한 메인 스레드에 압력을 가하여 UI가 버벅거리거나 오디오가 글리치를 발생 시킨다.
 이런 문제사항으로 ScriptProcessorNode는 사용되지 않고 AudioWorklet으로 대체 되었다.
 
