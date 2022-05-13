@@ -1,4 +1,13 @@
 
+# Audio 
+
+## BaseAudioContext.createScriptProcessor()
+더이상 사용되지 않고 있다.
+- createScriptProcessor(bufferSize, numberOfInputChannels, numberOfOutputChannels)
+- bufferSize : 샘플 프레임 단위의 버퍼 크기. 
+
+<b>"지정된 경우 bufferSize는 다음 값 중 하나여야 합니다. 256, 512, 1024, 2048, 4096, 8192, 16384. 전달되지 않거나 값이 0이면 구현에서 최적의 버퍼 크기를 선택합니다. 주어진 환경은 노드의 수명 동안 2의 일정한 거듭제곱이 됩니다.
+이 값은 이벤트가 전달되는 빈도 audioprocess와 각 호출을 처리해야 하는 샘플 프레임 수를 제어합니다. 에 대한 값 bufferSize이 낮을수록 지연 시간이 줄어듭니다(더 나은). 오디오 끊김 및 결함을 방지하려면 더 높은 값이 필요합니다. 작성자는 이 버퍼 크기를 지정하지 않고 구현에서 대기 시간과 오디오 품질 간의 균형을 유지하기 위해 적절한 버퍼 크기를 선택하도록 허용하는 것이 좋습니다." </b>- https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createScriptProcessor
 
 ## ScriptProcessorNode deprecated 경고
 배경 : Javascript에서 사용자 정의 오디오 처리를 활성화하기 위해 Web Audio API는 이벤트 핸들러를 사용하여 기본 UI스레드에서 사용자 스크립트를 호출하는 ScriptProcessorNode가 나왔는데
