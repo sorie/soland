@@ -51,6 +51,10 @@ HTTPS를 통해 제공되어야 하지만 http://localhost 로컬 테스트에�
 
 - 이모든 기능을 합친것이 GainNode이다. 
 
+## AudioWorkletProcessor.process
+AudioWorkletProcessor에서 파생된 클래스의 process() 메서드는 오디오 프로세서 worklet에 대한 오디오 프로세싱 알고리즘을 구현.
+- https://developer.mozilla.org/ko/docs/Web/API/AudioWorkletProcessor/process
+
 ##### 현재 Audio Worklet은 Chrome 66 이상에서 기본적으로 활성화되어 있다. Chrome 64 및 65에서 이 기능은 안정화 되지 않았다.
 
 
