@@ -1,5 +1,8 @@
 
 # Audio 
+개요 : Web Audio API가 처음 브라우저에 소개되었을 때, 이것은 실시간으로 오디오를 조작하는 사용자 정의 오디오 프로세서를 생성하기 위해 JavaScript 코드를 사용하고 있었다. 
+
+- 참고 문헌 : https://developer.mozilla.org/ko/docs/Web/API/Web_Audio_API/Using_AudioWorklet
 
 ## BaseAudioContext.createScriptProcessor()
 더이상 사용되지 않고 있다.
@@ -13,7 +16,7 @@
 배경 : Javascript에서 사용자 정의 오디오 처리를 활성화하기 위해 Web Audio API는 이벤트 핸들러를 사용하여 기본 UI스레드에서 사용자 스크립트를 호출하는 ScriptProcessorNode가 나왔는데
 두가지 문제가 있다.
 1. 이벤트 처리는 기본적으로 동기식이어서 대기 시간을 유도한다
-2. 코드 실행은 기본 스레드에서 발생하여 다양한 UI 및 DOM 관련 작업으로 일반적으로 혼잡한 메인 스레드에 압력을 가하여 UI가 버벅거리거나 오디오가 글리치를 발생 시킨다.
+2. 메인 스레드에서 실행되기 때문에 실행을 마치기 전까지 다른 모든 동작을 막는다. 코드 실행은 기본 스레드에서 발생하여 다양한 UI 및 DOM 관련 작업으로 일반적으로 혼잡한 메인 스레드에 압력을 가하여 UI가 버벅거리거나 오디오가 글리치를 발생 시킨다.
 이런 문제사항으로 ScriptProcessorNode는 사용되지 않고 AudioWorklet으로 대체 되었다.
 
 참고: https://developer.chrome.com/blog/audio-worklet/
@@ -21,6 +24,10 @@
 ## Audio Worklet
 오디오 처리하기 위해 메인 스레드를 사용하지 않고 오디오 처리 스레드 내에서 사용자 제공 Javascript코드를 모두 잘 유지 한다. 
 즉, 사용자 제공 스크립트 코드가 다른 내장 AudioNode와 함께 오디오 렌더링 스레드(AudioWorkletGlobalScope)에서 실행되어 추가 대기 시간 및 동기 렌더링를 보장한다.
+<br>
+
+"오디오 컨텍스트의 오디오 worklet은 메인 스레드에서 떨어져 실행되는 Worklet (en-US)인데, 이는 컨텍스트의 audioWorklet.addModule() (en-US) 메서드를 호출함으로써 이 worklet에 추가된 오디오 프로세싱 코드를 실행합니다. addModule()을 호출하면 명시된 JavaScript 파일을 로드하는데, 이 파일은 오디오 프로세서의 구현을 포함하고 있어야 합니다. 프로세서가 등록되었다면 여러분은 새로운 AudioWorkletNode를 생성할 수 있고, 이 노드가 다른 오디오 노드들과 함게 오디오 노드의 체인에 연결되었을 때 이 노드는 프로세서의 코드를 통해 오디오를 전달합니다." - https://developer.mozilla.org/ko/docs/Web/API/Web_Audio_API/Using_AudioWorklet
+
 <br>
 ![image](https://user-images.githubusercontent.com/12015609/167522025-6e6b0aa0-ac77-4beb-b493-e4480d0cd521.png)
 
