@@ -4,6 +4,45 @@
 
 - 참고 문헌 : https://developer.mozilla.org/ko/docs/Web/API/Web_Audio_API/Using_AudioWorklet
 
+## web Audio Workflow
+1. 오디오 컨텍스트를 만든다.
+2. 컨텍스트안에서 소스를 만든다.(<audio>, 오실레이터, 스트림)
+3. 이팩트 노드를 만든다.(리버브, 바이쿼드필터, 패너, 컴프레서)
+4. 최종 destination을 선택한다.(예를들면 스피커)
+5. 소스와 이팩트 걸고 destination을 연결한다.
+
+  ![image](https://user-images.githubusercontent.com/12015609/169218579-108c1887-01bc-43b9-8a2f-e9433411297f.png)
+  <br>
+  <small>(이미지 출처 : https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Basic_concepts_behind_Web_Audio_API)</small>
+  
+## 일반적인 오디오 그래프
+웹오디오API에서 오디오 그래프를 만들 때 필요한 일반적인 컨테이너와 정의
+- AudioContext :
+AudioContext 인터페이스는 AudioNode로 표현되는 오디오 모듈들이 서로 연결되어 구성된 오디오 프로세싱 그래프를 뜻한다. 오디오 컨텍스트는 보유하고 노드들의 생성과 오디오 처리의 실행 혹은 디코딩을 컨트롤한다. 컨텍스트를 이용해 어떤 일을 하려고 한다면 무엇보다 먼저 AudioContext를 생성해야 한다.
+
+## 오디오 이팩트 필터
+오디오 소스에 적용 할 수 있는 이펙트 인터페이스
+
+- BiquadFilterNode :
+간단한 저수준의 필터 AudioNode로 음색을 조절하는 디바이스나 그래픽 이퀄라이저같은 여러종류의 필터를 뜻한다. BiquadFilterNode는 언제하나 한개의 인풋과 한개의 아웃풋을 가진다.
+
+- ConvolerNode :
+주어진 AudioBuffer에 Linear Convolution을 수행하는 AudioNode이다 리버브를 구현할때 자주 사용된다.
+
+- DelayNode :
+딜레이를 구현하는 AudioNode로 인풋으로 들어오는 데이터에 딜레이를 걸어 아웃풋으로 전달한다.
+
+- DynamicsCompressorNode :
+컴프레션 이펙트를 제공하는 인터페이스로 다수의 사운드혹은 중첩되어 한번에 플레이될때 발생되는 클리핑이나 왜곡을 피하기위해 신호의 음량의 큰 파트의 음량을 줄여 주는 이팩트이다.
+
+- GainNode :
+  불륨을 조절할 수 있게 해주는 인터페이스로 주어진 gain을 인풋 데이터에 적용해 그결과를 아웃풋에 전달한다.
+  
+- StereoPannerNode :
+간단히 스테레오 패닝을 다룰수 있는 인터페이스로 오디오 스트림을 left 혹은 right로 패닝하는데 사용된다.
+  
+  참고 문헌 : https://ui.toast.com/weekly-pick/ko_20160321
+  
 ## 오디오 worklet 프로세서의 구조
 오디오 worklet 프로세서는 다음을 포함하는 JavaScript 모듈입니다:
 
