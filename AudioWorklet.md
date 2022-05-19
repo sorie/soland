@@ -41,6 +41,15 @@ AudioContext 인터페이스는 AudioNode로 표현되는 오디오 모듈들이
 - StereoPannerNode :
 간단히 스테레오 패닝을 다룰수 있는 인터페이스로 오디오 스트림을 left 혹은 right로 패닝하는데 사용된다.
   
+## Audio destionations
+모든 오디오 프로세스가 종료가 되면 audio destination을 통해 어디로 소리가 나가게 될지를 정의하게 된다.
+
+- AudioDestinationNode :
+주어진 컨텍스트안의 오디오소스의 최종 목적지를 뜻하는 인터페이스로 보통 스피커에 해당한다.
+
+- MediaStreamAudioDestinationNode :
+WebRTC MediaStream과 단일 AudioMediaStreamTrack로 구성된 audio destination을 뜻한다. Navigator.getUserMedia를 통해 얻어지는 MediaStream과 비슷한 방법으로 사용될 수 있다. audio destination역할을 하는 AudioNode이다.
+  
   참고 문헌 : https://ui.toast.com/weekly-pick/ko_20160321
   
 ## 오디오 worklet 프로세서의 구조
