@@ -2,7 +2,11 @@
 # Audio 
 개요 : Web Audio API가 처음 브라우저에 소개되었을 때, 이것은 실시간으로 오디오를 조작하는 사용자 정의 오디오 프로세서를 생성하기 위해 JavaScript 코드를 사용하고 있었다. 
 
-- 참고 문헌 : https://developer.mozilla.org/ko/docs/Web/API/Web_Audio_API/Using_AudioWorklet
+- 참고 문헌 : 
+- https://developer.mozilla.org/ko/docs/Web/API/Web_Audio_API/Using_AudioWorklet#adding_parameter_support_to_the_processor
+- https://developer.mozilla.org/ko/docs/Web/API/Web_Audio_API/Using_AudioWorklet
+- https://developer.mozilla.org/ko/docs/Web/API/Web_Audio_API/Basic_concepts_behind_Web_Audio_API
+- https://ui.toast.com/weekly-pick/ko_20160321
 
 ## web Audio Workflow
 1. 오디오 컨텍스트를 만든다.
@@ -77,6 +81,7 @@ WebRTC MediaStream과 단일 AudioMediaStreamTrack로 구성된 audio destinatio
 이런 문제사항으로 ScriptProcessorNode는 사용되지 않고 AudioWorklet으로 대체 되었다.
 
 참고: https://developer.chrome.com/blog/audio-worklet/
+  https://developer.chrome.com/blog/audio-worklet/#bi-directional-communication-with-messageport
 
 ## Audio Worklet
 오디오 처리하기 위해 메인 스레드를 사용하지 않고 오디오 처리 스레드 내에서 사용자 제공 Javascript코드를 모두 잘 유지 한다. 
