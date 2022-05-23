@@ -89,9 +89,10 @@ WebRTC MediaStream과 단일 AudioMediaStreamTrack로 구성된 audio destinatio
 <br>
 
 "오디오 컨텍스트의 오디오 worklet은 메인 스레드에서 떨어져 실행되는 Worklet (en-US)인데, 이는 컨텍스트의 audioWorklet.addModule() (en-US) 메서드를 호출함으로써 이 worklet에 추가된 오디오 프로세싱 코드를 실행합니다. addModule()을 호출하면 명시된 JavaScript 파일을 로드하는데, 이 파일은 오디오 프로세서의 구현을 포함하고 있어야 합니다. 프로세서가 등록되었다면 여러분은 새로운 AudioWorkletNode를 생성할 수 있고, 이 노드가 다른 오디오 노드들과 함게 오디오 노드의 체인에 연결되었을 때 이 노드는 프로세서의 코드를 통해 오디오를 전달합니다." - https://developer.mozilla.org/ko/docs/Web/API/Web_Audio_API/Using_AudioWorklet
-
 <br>
+  
 ![image](https://user-images.githubusercontent.com/12015609/167522025-6e6b0aa0-ac77-4beb-b493-e4480d0cd521.png)
+  
 
 1. AudioWorkletProcessor : Javascript 코드로 작성된 실제 오디오 프로세서, AudioWorkletGlobalScope에 있다.
 2. AudioWorkletNode : AudioWorkletProcessor의 대응물이며 메인 스레드의 다른 AudioNode와의 연결을 처리한다. 주요 전역 범위에 노출되고 일반 AudioNode와 같은 기능을 한다.
