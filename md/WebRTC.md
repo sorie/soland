@@ -1,4 +1,5 @@
-MDN의 WebRTC 문서에서는 WebRTC를 다음과 같이 정의
+
+#### * MDN의 WebRTC 문서에서는 WebRTC를 다음과 같이 정의
 
 "WebRTC(Web Real-Time Communication) 은 웹 애플리케이션과 사이트가 중간자 없이 브라우저 간에 오디오나 영상 미디어를 포착하고 마음대로 스트림 할 뿐 아니라, 임의의 데이터도 교환할 수 있도록 하는 기술입니다."
 
@@ -50,11 +51,24 @@ MDN의 WebRTC 문서에서는 WebRTC를 다음과 같이 정의
 11. 상대의 addIceCandidate()로 설정한다.
 12. 서로가 IceCandidate를 교환하면 onAddStream을 통해 Caller의 스트림을 받아올 수 있다. 
 
+### 시그널링
+다른곳에서 논의한 것처럼 서로 다른 네트워크에 있는 2개의 디바이스들을 서로 위치시키기 위해서는, 각 디바이스들의 위치를 발견하는 방법과 미디어 포맷 협의가 필요하다. 이 프로세스를 시그널링signalling이라 부르고 각 디바이스들을 상호간에 동의된 서버(socket.io 혹은 websocket을 이용한 서버)에 연결시킨다. 이 서버는 각 디바이스들이 negotiation(협의) 메세지들을 교환할 수 있도록 한다. 
 
-
+#### 시그널링 서버
+두 디바이스들 사이에 WebRTC 커넥션을 만들기 위해, 인터넷 네트워크에서 그 둘을 연결 시키는 작업을 해줄 signaling server가 필요하다. 
+* 시그널링 서버는 시그널링 데이터 내용을 몰라도 된다. (SDP) 메세지의 내용들은 시그널링 서버를 통해 상대편으로 가기만 하면 된다. 
+* ICE subsystem이 신호 데이터를 다른 피어에게 보내도록 지시하면, 다른 피어는 이 정보를 수신하여 자체 ICE subsystem에 전달하는 방법을 있다. 
+1. chat server는 클라이언트와 서버 사이에 Websocket API를 통해 JSON string으로 데이터를 전송한다.
+2. 서버는 새로운 유저를 등록하는 것, username을 세팅하는것, 채팅 메세지를 전송하는것 등등의 작업들을 하기 위해 다양한 메세지 타입들을 다룬다. 
+3. 시그널링과 ICE negotiation을 서버가 처리하기 위해서 코드를 작성해야 한다. 
+4. 모든 로그인된 유저들에게 브로드캐스팅하는 것이 아니라, 특정한 유저에게 직접 메세지를 전달해야 한다. 
+5. 서버가 따로 처리할 필요 없이, 수신된 원하지 않는 메세지 타입들을 처리한다. 
+6. 여러 서버를 만들 필요없이 동일한 서버를 이용하여 시그널 메시지를 보낼 수 있다. 
 
 ##### 참고사이트 
 - https://velog.io/@skyni/WebRTC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%95%EB%A6%AC
+- 알고리즘 : https://dareun.github.io/webRTC%E1%84%85%E1%85%B3%E1%86%AF-%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB-%E1%84%92%E1%85%AA%E1%84%89%E1%85%A1%E1%86%BC%E1%84%92%E1%85%AC%E1%84%8B%E1%85%B4-%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF
+- 시그널링 : https://developer.mozilla.org/ko/docs/Web/API/WebRTC_API/Signaling_and_video_calling
 
 
 
