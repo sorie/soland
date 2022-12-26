@@ -1,5 +1,6 @@
 
 "이전에 채팅을 구현할 때 내 채팅을 서버에 보내고 서버에서 브로드캐스팅하는 형태였지만! WebRTC는 서버를 거치지 않고 바로 데이터를 전송할 수 있는 것" <br/>
+![image](https://user-images.githubusercontent.com/12015609/209526365-709e30b0-0687-4c14-88a3-5e75ed93d503.png)
 출처 : https://ssocoit.tistory.com/219 [코딩하는 경제학도]
 
 
