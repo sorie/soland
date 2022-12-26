@@ -1,4 +1,8 @@
 
+"이전에 채팅을 구현할 때 내 채팅을 서버에 보내고 서버에서 브로드캐스팅하는 형태였지만! WebRTC는 서버를 거치지 않고 바로 데이터를 전송할 수 있는 것" <br/>
+출처 : https://ssocoit.tistory.com/219 [코딩하는 경제학도]
+
+
 #### * MDN의 WebRTC 문서에서는 WebRTC를 다음과 같이 정의
 
 "WebRTC(Web Real-Time Communication) 은 웹 애플리케이션과 사이트가 중간자 없이 브라우저 간에 오디오나 영상 미디어를 포착하고 마음대로 스트림 할 뿐 아니라, 임의의 데이터도 교환할 수 있도록 하는 기술입니다."
@@ -71,5 +75,6 @@
 - 시그널링 : https://developer.mozilla.org/ko/docs/Web/API/WebRTC_API/Signaling_and_video_calling
 
 
-
+본 콘텐츠를 무단으로 복사 후 게재 혹은 배포할 시 저작권법에 의거하여 처벌받을 수 있음을 명시합니다.
+Copyright © sorie lala
 
