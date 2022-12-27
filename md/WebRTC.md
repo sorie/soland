@@ -77,7 +77,9 @@
 ### SDP (Session DEscription Protocol)
 피어 투 피어 연결을 설명하는 표준, 오디오 및 비디오의 코덱, 소스 주소 및 타이밍 정보가 포함.
 
-### ICE candidate
+### ICE candidate (Interactive Connectivity Establishment)
+네트워크 토폴로지(일반적으로 오디오 및 비디오 채팅)에 관계없이 두 피어를 연결하기 위해 사용하는 프레임워크.
+이 프로토콜을 사용하면 두 피어가 NAT를 사용하여 각자의 로컬 네트워크에 있는 다른 장치와 글로벌 IP주소를 공유하더라도 서로 연결을 찾고 설정할 수 있다. 프레임워크 알고리즘은 두 피어를 연결하기위해 대기 시간이 가장 짧은 경로를 찾고 다음 옵션을 순서대로 시도한다.
 
 ### STURN, TURN
 시그널링 메시지에는 ICE 후보인 STURN/TURN서버 주소가 포함, WebRTC는 P2P 방식으로 작동하도록 설계되었기 때문에 사용자는 가능한 한 직접적으로 연결되어야 한다. 따라서 NAT게이트웨이, 방화벽을 넘을 방법을 찾아야 하고 이러한 시도가 실패할 경우 직접적인 연결에 실해한 것으로 간주하여중개 서버로 연결된다. 
@@ -93,6 +95,6 @@ WebSocket API는 STUN(Session Trabersal Utilities for NAT) 서버를 사용하�
 - stun, turn : https://roomedia.tistory.com/entry/WebRTC-RTCPeerConnection-RealTime-P2P-Communication
 - ICE : https://developer.mozilla.org/en-US/docs/Glossary/ICE
 
-본 콘텐츠를 무단으로 복사 후 게재 혹은 배포할 시 저작권법에 의거하여 처벌받을 수 있음을 명시합니다.
+본 콘텐츠를 무단으로 복사 후 게재 혹은 배포할 시 저작권법에 의거하여 처벌받을 수 있음을 명시합니다. <br/>
 Copyright © sorie lala
 
