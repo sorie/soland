@@ -70,11 +70,28 @@
 5. 서버가 따로 처리할 필요 없이, 수신된 원하지 않는 메세지 타입들을 처리한다. 
 6. 여러 서버를 만들 필요없이 동일한 서버를 이용하여 시그널 메시지를 보낼 수 있다. 
 
+## 용어 설명
+### RTCPeerConnection.createOffer()
+원격 피어에 대한 새 WebRTC 연결을 시작하기 위해 SDP를 생성한다. SDP 제안에는 WebRTC 세션에 이미 첨부된 객체, 코덱, 브라우저에서 지원하는 옵션, ICE가 이미 수집한 정보가 포함되어 있다. 연결하거나 기존 연결의 구성을 업데이트한다. 
+
+### SDP (Session DEscription Protocol)
+피어 투 피어 연결을 설명하는 표준, 오디오 및 비디오의 코덱, 소스 주소 및 타이밍 정보가 포함.
+
+### ICE candidate
+
+### STURN, TURN
+시그널링 메시지에는 ICE 후보인 STURN/TURN서버 주소가 포함, WebRTC는 P2P 방식으로 작동하도록 설계되었기 때문에 사용자는 가능한 한 직접적으로 연결되어야 한다. 따라서 NAT게이트웨이, 방화벽을 넘을 방법을 찾아야 하고 이러한 시도가 실패할 경우 직접적인 연결에 실해한 것으로 간주하여중개 서버로 연결된다. 
+WebSocket API는 STUN(Session Trabersal Utilities for NAT) 서버를 사용하여 컴퓨터 IP를 얻으며, 직접적인 연결에 실패한 경우 TURN(Traversal Using Relay around NAT) 서버를 사용하여 통신을 중개한다. 
+
 ##### 참고사이트 
 - https://velog.io/@skyni/WebRTC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%95%EB%A6%AC
 - 알고리즘 : https://dareun.github.io/webRTC%E1%84%85%E1%85%B3%E1%86%AF-%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB-%E1%84%92%E1%85%AA%E1%84%89%E1%85%A1%E1%86%BC%E1%84%92%E1%85%AC%E1%84%8B%E1%85%B4-%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF
 - 시그널링 : https://developer.mozilla.org/ko/docs/Web/API/WebRTC_API/Signaling_and_video_calling
-
+- SDP : https://developer.mozilla.org/en-US/docs/Glossary/SDP
+- createOffer : https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createOffer
+- CanvasCaptureMediaStreamTrack : https://developer.mozilla.org/en-US/docs/Web/API/CanvasCaptureMediaStreamTrack
+- stun, turn : https://roomedia.tistory.com/entry/WebRTC-RTCPeerConnection-RealTime-P2P-Communication
+- ICE : https://developer.mozilla.org/en-US/docs/Glossary/ICE
 
 본 콘텐츠를 무단으로 복사 후 게재 혹은 배포할 시 저작권법에 의거하여 처벌받을 수 있음을 명시합니다.
 Copyright © sorie lala
