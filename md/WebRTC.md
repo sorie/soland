@@ -85,6 +85,10 @@
 시그널링 메시지에는 ICE 후보인 STURN/TURN서버 주소가 포함, WebRTC는 P2P 방식으로 작동하도록 설계되었기 때문에 사용자는 가능한 한 직접적으로 연결되어야 한다. 따라서 NAT게이트웨이, 방화벽을 넘을 방법을 찾아야 하고 이러한 시도가 실패할 경우 직접적인 연결에 실해한 것으로 간주하여중개 서버로 연결된다. 
 WebSocket API는 STUN(Session Trabersal Utilities for NAT) 서버를 사용하여 컴퓨터 IP를 얻으며, 직접적인 연결에 실패한 경우 TURN(Traversal Using Relay around NAT) 서버를 사용하여 통신을 중개한다. 
 
+### TCP/UDP
+![image](https://user-images.githubusercontent.com/12015609/209640329-f37c4eed-c9cb-4767-b489-adfcc7e92e68.png) 
+이미지 출처 : https://mangkyu.tistory.com/15
+
 ##### 참고사이트 
 - https://velog.io/@skyni/WebRTC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%95%EB%A6%AC
 - 알고리즘 : https://dareun.github.io/webRTC%E1%84%85%E1%85%B3%E1%86%AF-%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB-%E1%84%92%E1%85%AA%E1%84%89%E1%85%A1%E1%86%BC%E1%84%92%E1%85%AC%E1%84%8B%E1%85%B4-%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF
