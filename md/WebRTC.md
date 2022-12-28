@@ -102,6 +102,7 @@ WebSocket API는 STUN(Session Trabersal Utilities for NAT) 서버를 사용하�
 - CanvasCaptureMediaStreamTrack : https://developer.mozilla.org/en-US/docs/Web/API/CanvasCaptureMediaStreamTrack
 - stun, turn : https://roomedia.tistory.com/entry/WebRTC-RTCPeerConnection-RealTime-P2P-Communication
 - ICE : https://developer.mozilla.org/en-US/docs/Glossary/ICE
+- Codec : https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs
 
 본 콘텐츠를 무단으로 복사 후 게재 혹은 배포할 시 저작권법에 의거하여 처벌받을 수 있음을 명시합니다. <br/>
 Copyright © sorie lala
