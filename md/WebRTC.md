@@ -70,6 +70,10 @@
 5. 서버가 따로 처리할 필요 없이, 수신된 원하지 않는 메세지 타입들을 처리한다. 
 6. 여러 서버를 만들 필요없이 동일한 서버를 이용하여 시그널 메시지를 보낼 수 있다. 
 
+#### RTCTrackEvent
+WebRTC API 인터페이스의 RTTrackEvent는 RTCPeerConnection의 일부인 RTCRtpReceiver에 새 MediaStreamTrack이 추가될 때 전송되는 트랙 이벤트를 나타낸다.
+출처 : https://developer.mozilla.org/en-US/docs/Web/API/RTCTrackEvent
+
 ## 용어 설명
 ### RTCPeerConnection.createOffer()
 원격 피어에 대한 새 WebRTC 연결을 시작하기 위해 SDP를 생성한다. SDP 제안에는 WebRTC 세션에 이미 첨부된 객체, 코덱, 브라우저에서 지원하는 옵션, ICE가 이미 수집한 정보가 포함되어 있다. 연결하거나 기존 연결의 구성을 업데이트한다. 
