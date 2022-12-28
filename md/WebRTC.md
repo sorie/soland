@@ -93,6 +93,10 @@ WebSocket API는 STUN(Session Trabersal Utilities for NAT) 서버를 사용하�
 ![image](https://user-images.githubusercontent.com/12015609/209640329-f37c4eed-c9cb-4767-b489-adfcc7e92e68.png) 
 이미지 출처 : https://mangkyu.tistory.com/15
 
+### SCTP
+스트림 제어 전송 프로토콜(SCTP)은 데이터의 안정적인 시퀀스 전송을 보장하는 전송 계층 프로토콜. SCTP는 하나의 단말 장치 또는 두 단말 장치에서 두 개 이상의 IP 주소로 구성되는 멀티호밍(multihoming) 지원을 제공.
+출처 : 구글 
+
 ##### 참고사이트 
 - https://velog.io/@skyni/WebRTC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%95%EB%A6%AC
 - 알고리즘 : https://dareun.github.io/webRTC%E1%84%85%E1%85%B3%E1%86%AF-%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB-%E1%84%92%E1%85%AA%E1%84%89%E1%85%A1%E1%86%BC%E1%84%92%E1%85%AC%E1%84%8B%E1%85%B4-%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF
