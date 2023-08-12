@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-soland-dev-133814-authRole",
+      "UnauthRoleArn": "arn:aws:iam::259490270792:role/amplify-soland-dev-133814-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::259490270792:role/amplify-soland-dev-133814-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-soland-dev-133814-deployment",
+      "UnauthRoleName": "amplify-soland-dev-133814-unauthRole",
+      "StackName": "amplify-soland-dev-133814",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:259490270792:stack/amplify-soland-dev-133814/0c443550-38ca-11ee-a75c-02398433459e",
+      "AmplifyAppId": "d2eq8a0lt2y0vr"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2eq8a0lt2y0vr",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}
