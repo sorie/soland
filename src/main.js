@@ -10,6 +10,9 @@ ES6Promise.polyfill()
 Vue.config.productionTip = false
 Vue.use(srEngine);
 Vue.prototype.appConfig = config
+import { Amplify } from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
 
 new Vue({
   router,
