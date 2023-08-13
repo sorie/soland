@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npm run-script serve",
-    "build": "npm run-script build",
-    "lint": "npm run-script lint"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",
