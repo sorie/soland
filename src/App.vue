@@ -2,7 +2,7 @@
   <div 
     id="app" 
     class="main"
-  >AM
+  >
     <header class="main__header" id="main__header">
       <router-link to="/List" class="logo">SoRi</router-link>
       <ul class="menu">
