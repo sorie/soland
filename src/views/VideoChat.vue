@@ -207,7 +207,7 @@ export default {
 			else if(type === 'audioinput' || type === 'audio'){
 				listElement = document.querySelector('select#availableAudios');
 			}
-			listElement.innerHTML = '';
+			listElement.innerHTML.replace('');
 			devices.map(device => {
         const deviceOption = document.createElement('option');
         deviceOption.label = device.label;

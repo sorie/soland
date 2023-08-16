@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import ProList from '@/components/ProList'
+import proList from '@/components/proList'
 
 export default {
-  name: 'List',
+  name: 'ProList',
   components: {
-    ProList
+    proList
   },
 }
 </script>

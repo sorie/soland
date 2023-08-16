@@ -1,14 +1,19 @@
 module.exports = {
     root: true,
     parserOptions: {
-        ecmaVersion: 2017,
+        ecmaVersion: 2020,
         sourceType: 'module'
     },
     plugins: [
         'vue'
     ],
     extends: [
-        'plugin:vue/recommended'
+        'plugin:vue/recommended',
+        'plugin:vue/vue3-recommended',
+        'plugin:vue/vue3-strongly-recommended',
+        'plugin:vue/strongly-recommended',
+        'plugin:vue/vue3-essential',
+        'plugin:vue/essential'
     ],
     env: {
         browser: true,
@@ -56,6 +61,7 @@ module.exports = {
                 sourceType: 'script',
                 ecmaVersion: 2015
             },
+            parser: '@babel/eslint-parser',
             env: {
                 browser: false,
                 node: true

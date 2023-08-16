@@ -6,5 +6,8 @@ export default {
   },
   [Constant.FETCH_IMG_GRID] : (state,payload) => {
     state.clipdata = payload.clipdata
+  },
+  [Constant.FETCH_PROJECTS] : (state,payload) => {
+    state.projectList = payload.projectList
   }
 }

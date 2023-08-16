@@ -3,12 +3,18 @@
     id="app" 
     class="main"
   >
-    <header class="main__header" id="main__header">
-      <router-link to="/List" class="logo">SoRi</router-link>
-      <ul class="menu">
-        <router-link to="/List">List</router-link>
-        <router-link to="/Components">Components</router-link>
-        <router-link to="/VideoChat">webRTC</router-link>
+    <header 
+    id="main__header" 
+    class="main__header">
+      <router-link to="/list" 
+      class="logo">
+      jeong sori
+      </router-link>
+      <ul 
+      class="menu">
+        <router-link to="/list">List</router-link>
+        <router-link to="/components">Components</router-link>
+        <router-link to="/videoChat">webRTC</router-link>
       </ul>
       <span 
         class="main__header-hide" 
@@ -18,16 +24,16 @@
       </span>
     </header>
     <router-view />
-    <Footer />
+    <cont_footer />
   </div>
 </template>
 <script>
-import Footer from '@/components/Footer'
+import cont_footer from '@/components/cont_footer'
 
 export default {
   name: 'App',
   components: {
-    Footer
+    cont_footer
   },
   data() {
     return {

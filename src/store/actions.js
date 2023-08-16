@@ -2,6 +2,7 @@ import Constant from '../Constant';
 // import axios from 'axios';
 import { createApi } from "unsplash-js";
 import Axios from 'axios';
+import projectListJson from '../static/prjecList.json'
 
 const imageApi = createApi({
   // Don't forget to set your access token here!
@@ -34,6 +35,16 @@ export default {
       console.log("something went wrong!");
     });
 
+  },
+  [Constant.FETCH_PROJECTS] : (store) => {
+    projectListJson.items.forEach(data => {
+      if(data.role){
+        data.date = data.date.replace(/\\n/g, '<br/>');
+        data.role = data.role.replace(/\\n/g, '<br/>');
+      }
+    });
+    return store.commit(Constant.FETCH_PROJECTS, {
+      projectList:projectListJson });
   }
 
 }

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <Comp-ex />
+    <comp-ex />
   </div>
 </template>
 <script>
-import CompEx from '@/components/Component_ex.vue'
+import compEx from '@/components/component_ex.vue'
 
 export default {
   components: {
-    CompEx
+    compEx
   }
 }
 </script>

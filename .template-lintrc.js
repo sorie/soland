@@ -7,6 +7,6 @@ module.exports = {
         "attribute-indentation": false,
         "no-invalid-interactive": false,
         'no-triple-curlies': false,
-        'no-inline-styles': false,
+        'no-inline-styles': false
     }
 };

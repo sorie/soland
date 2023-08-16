@@ -10,7 +10,9 @@
     </section>
     <section class="cont__wrapper">
       <h1>Swiper slide component</h1>
-      <swiper ref="mySwiper" class="main-visual-slide type2" v-if="bannerdata.results" :options="swiperOption">
+      <swiper ref="mySwiper" class="main-visual-slide type2" v-if="bannerdata.results" :options="swiperOption"
+      :pagination="{ clickable: true }"
+      >
         <swiper-slide v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
           <div class="bg bg-right" :style="`background-color: ${slide.color}`">right</div>
           <div class="bg bg-left" :style="`background-color: ${slide.color}`">left</div>
@@ -22,10 +24,10 @@
           </a>
           <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
         </swiper-slide>
+        
+        <button @click="swiper.slidePrev()" class="swiper-button-prev"></button>
+        <button class="swiper-button-next" @click="swiper.slideNext()"></button>
       </swiper>
-      <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div>
-      <div class="swiper-pagination" slot="pagination"></div>
     </section>
 
   </div>
@@ -33,8 +35,10 @@
 <script>
 import Constant from '../Constant'
 import { mapState } from 'vuex'
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide, directive } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/pagination';
 
 export default {
   name: 'component_ex',
@@ -63,7 +67,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(["bannerdata","clipdata"]),
+    ...mapState({ 
+      "bannerdata": state => state.bannerdata,
+      "clipdata": state => state.clipdata 
+    }),
     swiper() {
       return this.$refs.mySwiper.$swiper
     }

@@ -11,5 +11,8 @@ export default {
     results: [],
     total: 0,
     total_pages: 0
+  },
+  projectList : {
+    results: []
   }
 }

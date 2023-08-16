@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="cont_footer">
     <em>
       Copyright 2019 <mark>SORI JOENG</mark> All rights reserved.<br>
       email : enne3939@gmail.com
@@ -9,11 +9,11 @@
 </template>
 <script>
 export default {
-  name: "Footer"
+  name: "ContFooter"
 }
 </script>
 <style lang="scss">
-.footer {
+.cont_footer {
   padding: 40px;
 }
 </style>

@@ -2,34 +2,52 @@
   "name": "soland",
   "version": "1.0.0",
   "private": true,
-  "license": "sori",
+  "license": "UNLICENSED",
   "scripts": {
     "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
     "lint": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service lint"
   },
+  "dependencies": {
+    "@vue/compat": "^3.1.0",
+    "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "swiper": "^10.1.0",
+    "vue": "^3.1.0",
+    "vuetify": "^3.x"
+  },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.7.0",
+    "@aws-amplify/ui-vue": "^3.1.24",
+    "@babel/core": "*",
+    "@babel/eslint-parser": "^7.22.10",
+    "@babel/preset-env": "^7.1.6",
+    "@vitejs/plugin-vue": "^1.2.2",
+    "@vue/cli-plugin-babel": "^5.x",
     "@vue/cli-plugin-eslint": "^3.7.0",
-    "@vue/cli-service": "^3.7.0",
+    "@vue/cli-service": "^5.x",
+    "@vue/compiler-sfc": "^3.1.0",
+    "aws-amplify": "^5.3.7",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "broccoli-lint-eslint": "^3.3.2",
-    "core-js": "^2.6.5",
+    "core-js": "^3.32.0",
     "es6-promise": "^4.2.6",
-    "eslint": "6.8.0",
+    "eslint": "^7.5.0",
     "eslint-plugin-vue": "^9.0.0",
     "node-sass": "^8.x",
-    "sass-loader": "^7.1.0",
-    "swiper": "5.x",
+    "react": "18.2.0",
+    "react-native": ">=0.56",
+    "sass": "^1.65.1",
+    "sass-loader": "^13.x",
+    "uglify-js": "^3.x",
     "unsplash-js": "^7.0.2",
-    "vue": "^2.6.10",
-    "vue-awesome-swiper": "^4.1.1",
+    "vite": "^2.5.10",
     "vue-lazyload": "^1.3.3",
-    "vue-router": "^3.0.3",
+    "vue-loader": "^16.x",
+    "vue-router": "^4.x",
     "vue-swiper": "^0.5.0",
-    "vue-template-compiler": "^2.5.21",
-    "vuex": "^3.0.1",
+    "vue-template-compiler": "^2.7.14",
+    "vuex": "^4.x",
+    "webpack": "^5.x",
     "webrtc-adapter": "7.7.0"
   },
   "postcss": {
@@ -40,10 +58,5 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ],
-  "dependencies": {
-    "@aws-amplify/ui-vue": "^3.1.24",
-    "aws-amplify": "^5.3.7",
-    "sass": "^1.65.1"
-  }
+  ]
 }

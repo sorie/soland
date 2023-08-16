@@ -11,17 +11,19 @@
           <table>
             <thead>
               <tr>
-                <td v-for="(item, idx) in project.titlename" :key="`item-newmain-${idx}`">{{project.titlename[idx]}}</td>
+                <td v-for="(item, idx) in project.titlename" 
+                :key="`item-newmain-${idx}`">{{ project.titlename[idx] }}</td>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, idx) in projectListVal.items" :key="`item-newmain-${idx}`">
-                <td>{{item.name}}</td>
-                <td v-html=item.date>{{item.date}}</td>
-                <td>{{item.workspace}}</td>
-                <td>{{item.language}}</td>
-                <td v-html=item.role></td>
-                <td class="center">{{item.type}}</td>
+              <tr v-for="(item, idx) in projectListVal.items" 
+              v-bind:key="`item-newmain-${idx}`">
+                <td>{{ item.name }}</td>
+                <td>{{ item.date }}</td>
+                <td>{{ item.workspace }}</td>
+                <td>{{ item.language }}</td>
+                <td>{{ item.role }}</td>
+                <td class="center">{{ item.type }}</td>
               </tr>
             </tbody>
           </table>
@@ -34,9 +36,10 @@
 import prjecList from '../static/prjecList.json'
 
 export default {
+  name: 'ProList',
   data(){
     return{
-      project:prjecList,
+      project: prjecList,
       mainStyle : {
         backgroundImage: 'url(http://films.bybrettjohnson.com/img/tn-aquarium.gif)'
       }
@@ -54,7 +57,7 @@ export default {
     }
   },
   mounted() {
-    // this.heightResize()
+    this.heightResize()
   },
   methods: {
     heightResize() {
@@ -87,7 +90,6 @@ body {
     height: 60vh;
     overflow-x: scroll;
     overflow-y: scroll;
-    webkit-overflow-scrolling: touch;
   }
   table {
     min-width: 50rem;
