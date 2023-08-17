@@ -1,34 +1,34 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import page_list from '@/views/page_list.vue'
-import page_example from '@/views/page_example.vue'
-import videoChat from '@/views/videoChat.vue'
-import page_canvas from '@/views/page_canvas.vue'
- 
+import cont_list from '@/views/cont_list.vue'
+import cont_examples from '@/views/cont_examples.vue'
+import cont_videoChat from '@/views/cont_videoChat.vue'
+import cont_canvas from '@/views/cont_canvas.vue'
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
       path: '/soland',
-      redirect: '/page_list'
+      redirect: '/cont_list'
     },
     {
       path: '/',
-      redirect: '/page_list'
+      redirect: '/cont_list'
     },
     {
-      path: '/page_list',
-      name: 'page_list',
-      component: page_list
+      path: '/cont_list',
+      name: 'cont_list',
+      component: cont_list
     },
     {
-      path: '/components',
-      name: 'components',
-      component: page_example
+      path: '/cont_examples',
+      name: 'cont_examples',
+      component: cont_examples
     },
     {
-      path: '/videoChat',
-      name: 'videoChat',
-      component: videoChat
+      path: '/cont_videoChat',
+      name: 'cont_videoChat',
+      component: cont_videoChat
     }
   ]
 })

@@ -8,7 +8,7 @@
 import proList from '@/components/proList'
 
 export default {
-  name: 'ProList',
+  name: 'cont_list',
   components: {
     proList
   },

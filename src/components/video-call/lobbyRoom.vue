@@ -105,22 +105,27 @@ export default {
         },
     },
     mounted() {
-      if(!this.myinfo.userid){
-        window.location.replace(this.config.APP.domain + "/room-not-exist?message=authinfoisnone");
-      }
-      else {
-        ucEngine.Video.checkDevice({getDevice: this.getDeviceList.bind(this), getDeviceFail: this.getDeviceFail.bind(this)});
+      try {
+        if(!this.myinfo.userid){
+          window.location.replace(this.config.APP.domain + "/room-not-exist?message=authinfoisnone");
+        }
+        else {
+          ucEngine.Video.checkDevice({getDevice: this.getDeviceList.bind(this), getDeviceFail: this.getDeviceFail.bind(this)});
 
-        setTimeout(() => {          
-          this.displayname = this.myinfo.displayname;
-          ucEngine.Video.getLocalMedia({
-                devicetype: this.config.APP.devicetype, devicestatus: 'all', videodeviceid: this.selectvideodeviceid, audiodeviceid: this.selectmicdeviceid} ,this.getLocalStream.bind(this), this.getLocalStreamFail.bind(this));
+          setTimeout(() => {          
+            this.displayname = this.myinfo.displayname;
+            ucEngine.Video.getLocalMedia({
+                  devicetype: this.config.APP.devicetype, devicestatus: 'all', videodeviceid: this.selectvideodeviceid, audiodeviceid: this.selectmicdeviceid} ,this.getLocalStream.bind(this), this.getLocalStreamFail.bind(this));
 
-          // let timer = setTimeout(function(){
-          //   this.startmeeting();
-          // }.bind(this), 1000 * 90)
-          // this.lobbytimer = timer;
-        }, 1500);
+            // let timer = setTimeout(function(){
+            //   this.startmeeting();
+            // }.bind(this), 1000 * 90)
+            // this.lobbytimer = timer;
+          }, 1500);
+        }
+        
+      } catch(e) {
+        console.log(e);
       }
 
     },

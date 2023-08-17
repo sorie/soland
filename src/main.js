@@ -15,8 +15,5 @@ import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 Amplify.configure(awsExports);
 
-Vue.use({
-  router,
-  store
-})
-.mount('#app')
+Vue.use(router);
+Vue.use(store).mount('#app');

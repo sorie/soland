@@ -6,15 +6,15 @@
     <header 
     id="main__header" 
     class="main__header">
-      <router-link to="/list" 
+      <router-link to="/cont_list" 
       class="logo">
       jeong sori
       </router-link>
       <ul 
       class="menu">
-        <router-link to="/list">List</router-link>
-        <router-link to="/components">Components</router-link>
-        <router-link to="/videoChat">webRTC</router-link>
+        <router-link to="/cont_list">List</router-link>
+        <router-link to="/cont_examples">Components</router-link>
+        <router-link to="/cont_videoChat">webRTC</router-link>
       </ul>
       <span 
         class="main__header-hide" 
@@ -23,7 +23,7 @@
         숨기기
       </span>
     </header>
-    <router-view />
+    <router-view></router-view>
     <cont_footer />
   </div>
 </template>

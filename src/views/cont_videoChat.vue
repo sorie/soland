@@ -51,7 +51,7 @@
 import adapter from 'webrtc-adapter';
 
 export default {
-	name: 'VideoChat',
+	name: 'cont_videoChat',
 	data() {
 		return {
 			bSupportBrowser : true,
@@ -68,81 +68,86 @@ export default {
 		}
 	},
 	beforeMount() {
-		let userAgent = navigator.userAgent;
+    try{
+      let userAgent = navigator.userAgent;
 
-		if(userAgent.match(/Mobile|Windows Phone|Lumia|Android|webOS|iPhone|iPod|Blackberry|PlayBook|BB10|Opera Mini|\bCrMo\/|Opera Mobi/i) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ){
-			if(userAgent.match(/iPhone|iPod|iPad/i) || navigator.platform === 'MacIntel'){
-				this.devicetype = 'iOS';
-				this.appConfig.devicetype = 'iOS';
-			}
-			else{
-				this.devicetype = 'Android';
-				this.appConfig.devicetype = 'Android';
-			}
+      if(userAgent.match(/Mobile|Windows Phone|Lumia|Android|webOS|iPhone|iPod|Blackberry|PlayBook|BB10|Opera Mini|\bCrMo\/|Opera Mobi/i) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ){
+        if(userAgent.match(/iPhone|iPod|iPad/i) || navigator.platform === 'MacIntel'){
+          this.devicetype = 'iOS';
+          this.appConfig.devicetype = 'iOS';
+        }
+        else{
+          this.devicetype = 'Android';
+          this.appConfig.devicetype = 'Android';
+        }
 
-			if(this.devicetype==='iphone'){
-					if(navigator.userAgent.match('CriOS') || navigator.userAgent.match('FxiOS')) {
-							this.bSupportBrowser = false;
-					}
-					else {
-							// iphone은 safari만 지원.
-							let safariversion = parseFloat(userAgent.substr(userAgent.indexOf("Version")).split(' ')[0].split('/')[1]);
-							if(userAgent.indexOf('NAVER') !== -1) {
-								this.bSupportBrowser = false;
-							}else if(userAgent.indexOf('KAKAOTALK') !== -1) {
-								this.bSupportBrowser = false;
-							}else if(safariversion < 11.0){
-								this.bSupportBrowser = false;
-							}
-							else{
-								if(navigator.mediaDevices){
-									this.bSupportBrowser = true;
-								}
-								else{
-									this.bSupportBrowser = false;
-								}
-							}
-					}
-			}
-			else{
-					if(userAgent.indexOf('Chrome') !== -1) {
-							// android는 chrome만 지원.
-							if(userAgent.indexOf('NAVER') !== -1) {
-									this.bSupportBrowser = false;
-							}else if(userAgent.indexOf('KAKAOTALK') !== -1) {
-									this.bSupportBrowser = false;
-							}else{
-									this.bSupportBrowser = true;
-							}
-					}
-					else{
-							this.bSupportBrowser = false;
-					}
-			}
-		}
-		else{
-			this.ismobiletype = false;
-			this.devicetype = 'pc';
-			this.appConfig.devicetype = 'pc';
+        if(this.devicetype==='iphone'){
+            if(navigator.userAgent.match('CriOS') || navigator.userAgent.match('FxiOS')) {
+                this.bSupportBrowser = false;
+            }
+            else {
+                // iphone은 safari만 지원.
+                let safariversion = parseFloat(userAgent.substr(userAgent.indexOf("Version")).split(' ')[0].split('/')[1]);
+                if(userAgent.indexOf('NAVER') !== -1) {
+                  this.bSupportBrowser = false;
+                }else if(userAgent.indexOf('KAKAOTALK') !== -1) {
+                  this.bSupportBrowser = false;
+                }else if(safariversion < 11.0){
+                  this.bSupportBrowser = false;
+                }
+                else{
+                  if(navigator.mediaDevices){
+                    this.bSupportBrowser = true;
+                  }
+                  else{
+                    this.bSupportBrowser = false;
+                  }
+                }
+            }
+        }
+        else{
+            if(userAgent.indexOf('Chrome') !== -1) {
+                // android는 chrome만 지원.
+                if(userAgent.indexOf('NAVER') !== -1) {
+                    this.bSupportBrowser = false;
+                }else if(userAgent.indexOf('KAKAOTALK') !== -1) {
+                    this.bSupportBrowser = false;
+                }else{
+                    this.bSupportBrowser = true;
+                }
+            }
+            else{
+                this.bSupportBrowser = false;
+            }
+        }
+      }
+      else{
+        this.ismobiletype = false;
+        this.devicetype = 'pc';
+        this.appConfig.devicetype = 'pc';
 
-			// browser check
-			this.appConfig.browsertype = this.adapter.browserDetails.browser;
-			if(this.appConfig.browsertype==='chrome'){
-					if(userAgent.indexOf("Opera") !== -1 || userAgent.indexOf("OPR") !== -1){
-							this.appConfig.browsertype = "opera";
-					}
-			}
+        // browser check
+        this.appConfig.browsertype = this.adapter.browserDetails.browser;
+        if(this.appConfig.browsertype==='chrome'){
+            if(userAgent.indexOf("Opera") !== -1 || userAgent.indexOf("OPR") !== -1){
+                this.appConfig.browsertype = "opera";
+            }
+        }
 
-			if(window.navigator.userAgent.toLowerCase().indexOf("edg") > -1){
-					// wss websocket not supported
-					this.appConfig.browsertype = 'edg';
-					this.bSupportBrowser = false;
-			}
-		}	
+        if(window.navigator.userAgent.toLowerCase().indexOf("edg") > -1){
+            // wss websocket not supported
+            this.appConfig.browsertype = 'edg';
+            this.bSupportBrowser = false;
+        }
+      }	
 
-		if(!this.bSupportBrowser) {
-			alert('지원하지 않는 브라우저 입니다.')
-		}
+      if(!this.bSupportBrowser) {
+        alert('지원하지 않는 브라우저 입니다.')
+      }
+      
+    } catch(e) {
+      console.log(e);
+    }
 	},
 	mounted() {
 		const btn_connect = document.getElementById('btn_connect');
@@ -165,6 +170,7 @@ export default {
 					'video': true,
 					'audio': true
 				}
+        debugger;
 				const stream = await navigator.mediaDevices.getUserMedia(constraints);
 				const videoElement = document.getElementById('localVideo');
 				videoElement.srcObject = stream;
