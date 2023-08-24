@@ -46,6 +46,19 @@ export default {
     Swiper,
     SwiperSlide
   },
+  setup() {
+    const onSwiper = (swiper) => {
+      console.log(swiper);
+      swiper.slideTo(3, 1000, false) 
+    };
+    const onSlideChange = () => {
+      console.log('slide change');
+    };
+    return {
+      onSwiper,
+      onSlideChange,
+    };
+  },
   directives: {
     swiper: directive
   },
