@@ -34,7 +34,6 @@
 </template>
 <script>
 import Constant from '../Constant'
-import { onMounted } from 'vue'
 import { mapState } from 'vuex'
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide, directive } from 'swiper/vue'
@@ -73,17 +72,21 @@ export default {
       return this.$refs.mySwiper.$swiper
     }
   },
-  onBeforeMount: () => {
-    console.log('Current Swiper instance object', this.swiper)
-    try {
-      console.log(Constant.FETCH_IMAGE_SLIDE);
-      this.swiper.slideTo(3, 1000, false) 
-      this.$store.dispatch(Constant.FETCH_IMAGE_SLIDE)
-      this.$store.dispatch(Constant.FETCH_IMG_GRID)
+  onServerPrefetch: () => {
+    console.log(onserverprefetch);
+  },
+  mounted() {
+    this.$nextTick(() => {
+      try {
+        // console.log('Current Swiper instance object', this.swiper)
+        console.log(Constant.FETCH_IMAGE_SLIDE);
+        this.$store.dispatch(Constant.FETCH_IMAGE_SLIDE);
+        this.$store.dispatch(Constant.FETCH_IMG_GRID);
 
-    } catch(e) {
-      console.error(e);
-    }
+      } catch(e) {
+        console.error(e);
+      }
+    })
   },
   methods: {
     getBanner($d) {
