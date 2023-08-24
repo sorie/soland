@@ -74,11 +74,9 @@ export default {
       if(userAgent.match(/Mobile|Windows Phone|Lumia|Android|webOS|iPhone|iPod|Blackberry|PlayBook|BB10|Opera Mini|\bCrMo\/|Opera Mobi/i) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ){
         if(userAgent.match(/iPhone|iPod|iPad/i) || navigator.platform === 'MacIntel'){
           this.devicetype = 'iOS';
-          this.appConfig.devicetype = 'iOS';
         }
         else{
           this.devicetype = 'Android';
-          this.appConfig.devicetype = 'Android';
         }
 
         if(this.devicetype==='iphone'){
@@ -124,19 +122,18 @@ export default {
       else{
         this.ismobiletype = false;
         this.devicetype = 'pc';
-        this.appConfig.devicetype = 'pc';
 
         // browser check
-        this.appConfig.browsertype = this.adapter.browserDetails.browser;
-        if(this.appConfig.browsertype==='chrome'){
+        this.browsertype = this.adapter.browserDetails.browser;
+        if(this.browsertype==='chrome'){
             if(userAgent.indexOf("Opera") !== -1 || userAgent.indexOf("OPR") !== -1){
-                this.appConfig.browsertype = "opera";
+                this.browsertype = "opera";
             }
         }
 
         if(window.navigator.userAgent.toLowerCase().indexOf("edg") > -1){
             // wss websocket not supported
-            this.appConfig.browsertype = 'edg';
+            this.browsertype = 'edg';
             this.bSupportBrowser = false;
         }
       }	
