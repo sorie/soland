@@ -10,13 +10,22 @@
     </section>
     <section class="cont__wrapper">
       <h1>Swiper slide component</h1>
-      <swiper ref="mySwiper" class="main-visual-slide type2" v-if="bannerdata.results" :options="swiperOption"
-      :pagination="{ clickable: true }"
+      <swiper 
+        class="mySwiper main-visual-slide type2" 
+        v-if="bannerdata.results" 
+        :options="swiperOption"
+        :pagination="{
+          type: 'progressbar',
+        }"
+        :navigation="true"
+        :modules="modules"
       >
         <swiper-slide v-for="(slide, idx) in bannerdata.results" :key="`item-newmain-${idx}`">
-          <div class="bg bg-right" :style="`background-color: ${slide.color}`">right</div>
+          <div class="bg bg-right" 
+          :style="`background-color: ${slide.color}`">right</div>
           <div class="bg bg-left" :style="`background-color: ${slide.color}`">left</div>
-          <a :href="slide.links.html" target="_blank" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
+          <a 
+          :href="slide.links.html" target="_blank" :style="`background-image:${slide.urls.regular}`" class="logger_click"  :data-id="slide.id">       
             <div class="slide_cont vod">    
               <img :src="getBanner(slide.urls.regular)"  class="swiper-lazy" :alt="slide.alt_description">
               <span class="sub" :style="`color:${slide.color}`">{{slide.description}}</span>                             
@@ -24,9 +33,6 @@
           </a>
           <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
         </swiper-slide>
-        
-        <button @click="swiper.slidePrev()" class="swiper-button-prev"></button>
-        <button class="swiper-button-next" @click="swiper.slideNext()"></button>
       </swiper>
     </section>
 
@@ -35,10 +41,12 @@
 <script>
 import Constant from '../Constant'
 import { mapState } from 'vuex'
-import { Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide, directive } from 'swiper/vue'
+import { useSwiper, Swiper, SwiperSlide, directive } from 'swiper/vue'
+import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css'
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
 
 export default {
   name: 'component_ex',
@@ -47,6 +55,7 @@ export default {
     SwiperSlide
   },
   setup() {
+    const swiper = useSwiper();
     const onSwiper = (swiper) => {
       console.log(swiper);
       swiper.slideTo(3, 1000, false) 
@@ -55,8 +64,10 @@ export default {
       console.log('slide change');
     };
     return {
+      swiper,
       onSwiper,
       onSlideChange,
+      modules: [Pagination, Navigation],
     };
   },
   directives: {
@@ -66,13 +77,9 @@ export default {
     return {
       swiperOption: {
         loop: true,
-        slidesPerView: 'auto',
+        slidesPerView: '1',
         spaceBetween: 30,
         lazy: true,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },
         pagination: {
           el: '.swiper-pagination'
         }
@@ -80,10 +87,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["bannerdata","clipdata"]),
-    swiper() {
-      return this.$refs.mySwiper.$swiper
-    }
+    ...mapState(["bannerdata","clipdata"])
   },
   onServerPrefetch: () => {
     console.log(onserverprefetch);
@@ -110,9 +114,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.swiper-container{
+.swiper-slide {
   height: 500px;
   font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
+  &:empty {
+    background-color: rgb(0, 0, 0);
+  }
   .bg {
     position: absolute;
     top: 0;
@@ -129,62 +136,54 @@ export default {
       right: 50%;
     }
   }
-  .swiper-wrapper {
-    height: 380px;
-    .swiper-slide {
-      &:empty {
-        background-color: rgb(0, 0, 0);
-      }
-    }
-    .slide_cont {
-      width: 100%;
+  .slide_cont {
+    width: 100%;
+    height: 100%;
+    img{
+      position: absolute;
+      width: auto;
       height: 100%;
-      img{
-        position: absolute;
-        width: auto;
-        left: 50%;
-        bottom: 50%;
-        margin: 0px 0px 0px -540px;
-        -webkit-transform: translateY(50%);
-        -moz-transform: translateY(50%);
-        transform: translateY(50%);
-        transition: transform 1s ease-in;
-        text-align: left;
-        color: rgb(0, 0, 0);
-      }
-      .title {
-        display: block;
-        margin-bottom: 0px;
-        line-height: 1;
-        font-size: 2rem;
-        font-weight: 400;
-        opacity: 1;
-      }
-      .sub {
-        position: absolute;
-        bottom: 1em;
-        left: 50%;
-        transform: translate(-50%);
-        line-height: 1.5;
-        margin: 0px;
-        padding-top: 1.1em;
-        font-size: 1.5rem;
-        font-weight: 800;
-        opacity: 0.9;
-        -webkit-filter: invert(100%);
-        filter: invert(100%);
-      }
-      .sub2 {
-        display: block;
-        font-size: 17px;
-        line-height: 18px;
-        color: #fff;
-        padding-top: 20px;
-        letter-spacing: .5px;
-      }
-
+      left: 50%;
+      -webkit-transform: translate(-50%);
+      -moz-transform: translate(-50%);
+      transform: translate(-50%);
+      transition: transform 1s ease-in;
+      text-align: left;
+      color: rgb(0, 0, 0);
     }
+    .title {
+      display: block;
+      margin-bottom: 0px;
+      line-height: 1;
+      font-size: 2rem;
+      font-weight: 400;
+      opacity: 1;
+    }
+    .sub {
+      position: absolute;
+      bottom: 1em;
+      left: 50%;
+      transform: translate(-50%);
+      line-height: 1.5;
+      margin: 0px;
+      padding-top: 1.1em;
+      font-size: 1.5rem;
+      font-weight: 800;
+      opacity: 0.9;
+      -webkit-filter: invert(100%);
+      filter: invert(100%);
+    }
+    .sub2 {
+      display: block;
+      font-size: 17px;
+      line-height: 18px;
+      color: #fff;
+      padding-top: 20px;
+      letter-spacing: .5px;
+    }
+
   }
+
   .logger_click {
     position: absolute;
     top:0;left:0;right:0;bottom:0;
@@ -192,6 +191,7 @@ export default {
   }
 
 }
+
 .cont__wrapper {
   position: relative;
   width: 100%;
