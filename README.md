@@ -25,7 +25,7 @@ yarn serve
 
 #### 테스트 url
 ```
-http://localhost:8080/
+http://localhost:5000/
 ```
 
 #### Customize configuration
