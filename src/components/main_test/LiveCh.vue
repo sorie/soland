@@ -2,12 +2,16 @@
     <div class="tving-main-livech">
         <p class="inner">티빙 라이브</p>
 
-        <div v-swiper:mySwiper="swiperOption" v-if="items.length > 0" ref="swiper">
+        <div v-swiper:mySwiper="swiperOption" 
+          v-if="items.length > 0" ref="swiper"
+        >
             <div class="tving-main-livech-tmp2">
                 
             </div>
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(item,idx) in items" :key="item.id + idx" @click="liveClick(item.live_code)">
+                <div class="swiper-slide" v-for="(item,idx) in items" 
+                :key="item.id + idx" @click="liveClick(item.live_code)"
+                >
                 
                 <!-- <div class="info">
                     <div><img :src="`//image.tving.com/upload/cms/caic/CAIC1800/${item.live_code}.png`" class="logo"></div>

@@ -1,6 +1,7 @@
 <template>
-  <div v-if="mounted">
-
+  <div 
+    v-if="mounted"
+  >
     <WarnigPage />
     <div class="livech__list">
       <div class="livech__list__title">
@@ -19,7 +20,10 @@
           </li>
         </ul> -->
       </div>
-      <div class="cjp__ui-loading" v-if="loading">
+      <div 
+        class="cjp__ui-loading" 
+        v-if="loading"
+      >
         <div class="item loading-2">
           <div class="spinner">
             <div class="circle circle-1">

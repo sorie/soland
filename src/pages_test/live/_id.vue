@@ -1,5 +1,7 @@
 <template>
-    <div class="tving-view" v-if="data">
+    <div class="tving-view" 
+      v-if="data"
+    >
         <div class="player-area-tmp" />
         <div class="player-area" ref="playerarea">
             <div class="player-box">
@@ -12,7 +14,9 @@
                 </section> -->
                 <!--플레이어 : 끝-->
 
-                <template v-if="data.schedule">
+                <template 
+                  v-if="data.schedule"
+                >
                         <!-- <img :data-src="getThumbnail(item.schedule.channel.code)" class="swiper-lazy"> -->
                     <!-- <img :src="`//image.tving.com/crop.php?u=http://image.tving.com/upload/cms/caie/CAIE0400/${data.schedule.episode.code}.jpg&w=700`" alt=""> -->
                     <!-- <img :src="getThumbnail(data.schedule.channel.code)" alt=""> -->
@@ -33,7 +37,9 @@
                 <p>{{data.schedule.program.story.ko}}</p>
             </div>
 
-            <template v-if="data.schedule.episode">
+            <template 
+              v-if="data.schedule.episode"
+            >
                 <p class="t">
                     {{data.schedule.episode.name.ko}}
                 </p>

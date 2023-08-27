@@ -1,24 +1,52 @@
 <template>
     <div class="tving-main-banner">
-        <div v-swiper:mySwiper="swiperOption" v-if="data.length > 0">
+        <div 
+          v-swiper:mySwiper="swiperOption" 
+          v-if="data.length > 0"
+        >
             <div class="swiper-wrapper" ref="swiper">
                 <template v-for="(item, idx) in data">
-                    <div class="swiper-slide" :key="'top-banner-'+idx" v-if="item.banner_type == 'AMTP0900'">
+                    <div 
+                      class="swiper-slide" 
+                      :key="'top-banner-'+idx" 
+                      v-if="item.banner_type == 'AMTP0900'"
+                    >
                         <a @click="liveClick(item.content.banner_link_url)" class="thumb_top" target="_self" alt="김비서가 왜그럴까" data-nethru_clcode_link="A000015">
-                            <img  :data-src="`//image.tving.com${item.content.banner_image_url}`" v-if="item.content.banner_image_url" class="swiper-lazy">
+                            <img  
+                              :data-src="`//image.tving.com${item.content.banner_image_url}`" 
+                              v-if="item.content.banner_image_url" class="swiper-lazy"
+                            >
                             
                             <div class="main-visual-slide-info" :class="{'type-live': item.banner_type == 'AMTP0900','type-vod': item.banner_type == 'AMTP1000','type-movie': item.banner_type == 'AMTP1100'}">
-                                <div class="main-visual-slide-title" v-if="item.banner_type == 'AMTP0900' || item.banner_type == 'AMTP1100'">
-                                    <p v-if="!item.content.banner_title2">{{item.content.banner_title}}</p>
-                                    <p v-if="item.content.banner_title2">{{item.content.banner_title2}}</p>
-                                    <p v-if="item.content.banner_title2 && item.content.banner_title3">{{item.content.banner_title3}}</p>
+                                <div 
+                                  class="main-visual-slide-title" 
+                                  v-if="item.banner_type == 'AMTP0900' || item.banner_type == 'AMTP1100'"
+                                >
+                                    <p 
+                                      v-if="!item.content.banner_title2"
+                                    >
+                                      {{item.content.banner_title}}
+                                    </p>
+                                    <p 
+                                      v-if="item.content.banner_title2"
+                                    >
+                                      {{item.content.banner_title2}}
+                                    </p>
+                                    <p 
+                                      v-if="item.content.banner_title2 && item.content.banner_title3"
+                                    >
+                                      {{item.content.banner_title3}}
+                                    </p>
                                 </div>
                                 <div class="main-visual-slide-subtitle">
                                     <p>{{item.content.banner_sub_title2}}</p>
                                     <p>{{item.content.banner_sub_title3}}</p>
                                 </div>
                                 <div class="main-visual-slide-description" :style="`color:#${(item.content.banner_bc_notice_color)?item.content.banner_bc_notice_color.replace('#',''):''}`">
-                                    <img src="//m.tving.com/public/images/detail/tag_onair.png" alt="onair" v-if="item.banner_type == 'AMTP0900'">
+                                    <img 
+                                      src="//m.tving.com/public/images/detail/tag_onair.png" alt="onair" 
+                                      v-if="item.banner_type == 'AMTP0900'"
+                                    >
                                     <p>{{item.content.banner_bc_notice}}</p>
                                 </div>
                             </div>

@@ -1,9 +1,26 @@
 <template>
-    <nav id="gnb-header" :class="{'mode-hide':hideChk,'mode-prev':modePrevChk,'mode-over':modeOverChk}" class="tving-nav navbar is-fixed-top" role="navigation" aria-label="main navigation" ref="nav">
-        <div class="container">
-            <div class="navbar-brand">
-                <nuxt-link to="/" class="logo navbar-item" href="https://bulma.io">
-                    <i class="material-icons">
+    <nav 
+      id="gnb-header" 
+      :class="{'mode-hide':hideChk,'mode-prev':modePrevChk,'mode-over':modeOverChk}" 
+      class="tving-nav navbar is-fixed-top" 
+      role="navigation" 
+      aria-label="main navigation" 
+      ref="nav"
+    >
+        <div 
+          class="container"
+        >
+            <div 
+             class="navbar-brand"
+            >
+                <nuxt-link 
+                  to="/" 
+                  class="logo navbar-item" 
+                  href="https://bulma.io"
+                >
+                    <i 
+                      class="material-icons"
+                    >
                         arrow_back
                     </i>
                 </nuxt-link>
@@ -12,13 +29,21 @@
                     live
                 </nuxt-link> -->
             </div>
-            <div id="navMenuDocumentation" class="navbar-menu" :class="{'is-active': menuIsActive}">
+            <div 
+              id="navMenuDocumentation" 
+              class="navbar-menu" 
+              :class="{'is-active': menuIsActive}"
+            >
                 <!-- SUB -->
             </div>
         </div>
 
-        <div class="nav-dimm" ref="navdimm"  :class="{'is-active': menuIsActive}" @click="toggleMenuState()">
-
+        <div 
+          class="nav-dimm" 
+          ref="navdimm"  
+          :class="{'is-active': menuIsActive}" 
+          @click="toggleMenuState()"
+        >
         </div>
 
     </nav>

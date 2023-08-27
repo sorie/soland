@@ -15,14 +15,22 @@
                 <dt>{{LOCALE.title.yourname}}</dt>
                 <dd><input type="text" id="inputdisplayname" :value="displayname" placeholder="Enter your full name"></dd>
             </dl>
-            <div v-if="checkdevice && videodevicelist.length <= 0" class="Noti">No camera has been detected.</div>
+            <div 
+              v-if="checkdevice && videodevicelist.length <= 0" class="Noti"
+            >
+              No camera has been detected.
+            </div>
             <dl id="cameraselect">
                 <dt>{{LOCALE.title.camera}}</dt>
                 <dd style="overflow: unset;">
                     <div class="left custom-select" v-on:click="dropdown('video')" style="overflow: unset;">
                         <div id="selectvideo" class="select-selected">{{selectvideodevice}}</div>
                         <div id="videolist" class="select-items select-hide">
-                            <div v-for="(videodevice,idx) in videodevicelist" :key="idx" v-on:click="changedevice('video',videodevice.label,videodevice.deviceId)">{{videodevice.label}}</div>
+                            <div v-for="(videodevice,idx) in videodevicelist" 
+                              :key="idx" v-on:click="changedevice('video',videodevice.label,videodevice.deviceId)"
+                              >
+                              {{videodevice.label}}
+                            </div>
                         </div>
                     </div>
                     <div class="right">
@@ -39,7 +47,11 @@
                     <div class="left custom-select" v-on:click="dropdown('mic')" style="overflow: unset;">
                         <div id="selectmic" class="select-selected">{{selectmicdevice}}</div>
                         <div id="miclist" class="select-items select-hide">
-                            <div v-for="(micdevice,idx) in micdevicelist" :key="idx" v-on:click="changedevice('mic', micdevice.label, micdevice.deviceId)">{{micdevice.label}}</div>
+                            <div v-for="(micdevice,idx) in micdevicelist" 
+                              :key="idx" v-on:click="changedevice('mic', micdevice.label, micdevice.deviceId)"
+                              >
+                              {{micdevice.label}}
+                            </div>
                         </div>
                     </div>
 
