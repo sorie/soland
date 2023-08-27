@@ -16,7 +16,6 @@
     "vuetify": "^3.x"
   },
   "devDependencies": {
-    "@aws-amplify/ui-vue": "^3.1.24",
     "@babel/core": "*",
     "@babel/eslint-parser": "^7.22.10",
     "@babel/preset-env": "^7.1.6",
@@ -25,7 +24,6 @@
     "@vue/cli-plugin-eslint": "^3.7.0",
     "@vue/cli-service": "^5.x",
     "@vue/compiler-sfc": "^3.1.0",
-    "aws-amplify": "^5.3.7",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "broccoli-lint-eslint": "^3.3.2",
