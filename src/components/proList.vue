@@ -23,7 +23,6 @@
                 <td>{{ item.workspace }}</td>
                 <td>{{ item.language }}</td>
                 <td>{{ item.role }}</td>
-                <td class="center">{{ item.type }}</td>
               </tr>
             </tbody>
           </table>
