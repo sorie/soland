@@ -3,43 +3,20 @@
     id="app" 
     class="main"
   >
-    <header 
-      id="main__header" 
-      class="main__header"
-    >
-      <router-link 
-        to="/cont_list" 
-        class="logo"
-      >
-      jeong sori
-      </router-link>
-      <ul 
-        class="menu"
-      >
-        <router-link to="/cont_list">List</router-link>
-        <router-link to="/cont_examples">Components</router-link>
-        <router-link to="/cont_videoChat" 
-          @click="notworking()">webRTC</router-link
-        >
-      </ul>
-      <span 
-        class="main__header-hide" 
-        @click="headHide"
-      >
-        숨기기
-      </span>
-    </header>
-    <router-view/>
+    <HeaderTop />
+    <router-view />
     <cont_footer />
   </div>
 </template>
 <script>
 import cont_footer from '@/components/cont_footer'
+import HeaderTop from '@/components/HeaderTop.vue'
 
 export default {
   name: 'App',
   components: {
-    cont_footer
+    cont_footer,
+    HeaderTop
   },
   data() {
     return {
@@ -63,9 +40,6 @@ export default {
         console.log("error")
       }
       
-    },
-    notworking() {
-      return alert('오류 검사 중입니다.');
     }
   }
 }
